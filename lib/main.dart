@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musical_mingle/screens/dashboard_screen.dart';
 import 'package:musical_mingle/screens/login_screen.dart';
 import 'package:musical_mingle/screens/register_screen.dart';
 import 'package:musical_mingle/screens/splash_screen.dart';
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
       title: 'Musical Mingle',
       routes:  {
         '/login': (context) => const LoginPage(),
-        '/register' :(context) => const RegisterPage() // Default route
+        '/register' :(context) => const RegisterPage(),
+        '/dashboard' :(context) => const DashboardPage(), 
       },
       initialRoute: '/',
       theme: ThemeData(

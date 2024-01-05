@@ -72,8 +72,9 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 25),
                 // sign in button
                 MyButton(onTap: () {
-                  //  loginPageLogic.signUserIn(usernameController.text,passwordController.text);
-                },buttonName: "Sign In",),
+                   Navigator.pushNamed(context, '/dashboard');
+                  
+                  },buttonName: "Sign In",),
                 const SizedBox(height: 50),
                 // or continue with
                 Padding(
