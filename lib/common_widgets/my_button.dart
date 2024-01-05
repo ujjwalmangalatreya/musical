@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class MyButton extends StatelessWidget {
   final void Function()? onTap;
-  const MyButton({super.key, required this.onTap});
+  final String buttonName;
+  const MyButton({super.key, 
+  required this.onTap,
+  required this.buttonName
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +20,10 @@ class MyButton extends StatelessWidget {
           color: Colors.black,
           borderRadius: BorderRadius.circular(8),
         ),
-        child: const Center(
+        child:  Center(
           child: Text(
-            "Sign In",
-            style: TextStyle(
+           buttonName,
+            style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 16,

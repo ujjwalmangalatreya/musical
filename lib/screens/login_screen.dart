@@ -1,10 +1,8 @@
-
 import 'package:flutter/material.dart';
 
 import '../common_widgets/my_button.dart';
 import '../common_widgets/my_textfield.dart';
 import '../common_widgets/square_tile.dart';
-
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -28,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 50),
+                const SizedBox(height: 20),
                 // logo
                 const Icon(
                   Icons.lock,
@@ -73,11 +71,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 25),
                 // sign in button
-                MyButton(
-                  onTap: (){
-                //  loginPageLogic.signUserIn(usernameController.text,passwordController.text);
-                  } 
-                ),
+                MyButton(onTap: () {
+                  //  loginPageLogic.signUserIn(usernameController.text,passwordController.text);
+                },buttonName: "Sign In",),
                 const SizedBox(height: 50),
                 // or continue with
                 Padding(
@@ -132,11 +128,16 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(color: Colors.grey[700]),
                     ),
                     const SizedBox(width: 4),
-                    const Text(
-                      'Register now',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
+                    GestureDetector(
+                      onTap: () {
+                       Navigator.pushNamed(context, '/register');
+                      },
+                      child: const Text(
+                        'Register now',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
