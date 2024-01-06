@@ -2,8 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:musical_mingle/UI/screens/musician_screens/musician_list_screen.dart';
 
-
-
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
 
@@ -76,10 +74,10 @@ class _DashboardPageState extends State<DashboardPage> {
                   ],
                 ),
               ),
-              Divider(
+              const Divider(
                 color: Colors.black,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               //Join a game nearby ...
@@ -88,7 +86,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Find a musician nearby",
+                    const Text("Find a musician nearby",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -125,18 +123,29 @@ class _DashboardPageState extends State<DashboardPage> {
                       margin: EdgeInsets.all(8.0),
                       child: Container(
                         decoration: BoxDecoration(
+                          image:  DecorationImage(
+                            image: AssetImage("assets/M${index+1}.png"),
+                            fit: BoxFit.fill
+                          ),
                             borderRadius: BorderRadius.circular(10)),
                         width: 350.0,
                         // height: 250.0,
-                        child: Center(
-                          child: Text('Card $index'),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text("Robin Hood/ Drummer",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          ),
                         ),
                       ),
                     );
                   },
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               // Book A Venue Nearby
@@ -145,7 +154,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Find a event nearby",
+                    const Text("Find a event nearby",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -182,6 +191,10 @@ class _DashboardPageState extends State<DashboardPage> {
                       margin: EdgeInsets.all(8.0),
                       child: Container(
                         decoration: BoxDecoration(
+                            image:  DecorationImage(
+                                image: AssetImage("assets/E${index+1}.png"),
+                                fit: BoxFit.fill
+                            ),
                             borderRadius: BorderRadius.circular(10)),
                         width: 350.0,
                         // height: 250.0,
@@ -193,7 +206,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   },
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               // Refer Friend Section
@@ -205,8 +218,8 @@ class _DashboardPageState extends State<DashboardPage> {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(18.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(18.0),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [

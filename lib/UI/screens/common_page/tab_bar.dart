@@ -22,7 +22,7 @@ class _TabBarMenuState extends State<TabBarMenu> {
     return  Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[200],
-        title: Text('Welcome !! Ujjwal Atreya..'),
+        title: const Text('Welcome !! Ujjwal Atreya..'),
       ),
       body: _pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -52,38 +52,39 @@ class _TabBarMenuState extends State<TabBarMenu> {
 
       ),
       drawer: Drawer(
+
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            const DrawerHeader(
+             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.grey.shade300
               ),
-              child: Text(
-                'Drawer Header',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
+              child: const Center(
+                child: CircleAvatar(
+                    radius: 100, // Adjust the radius as needed
+                    backgroundImage: AssetImage('assets/M2.png')
                 ),
-              ),
+              )
             ),
             ListTile(
-              title: Text('Item 1'),
+              title: const Text('P R O F I L E'),
               onTap: () {
                 // Add your navigation logic here
                 Navigator.pop(context); // Close the drawer
               },
             ),
             ListTile(
-              title: Text('Item 2'),
+              title: const Text('R E Q U E S T S'),
               onTap: () {
                 // Add your navigation logic here
                 Navigator.pop(context); // Close the drawer
               },
             ),
-            Divider(),
+            const Divider(),
+
             ListTile(
-              title: Text('Close Drawer'),
+              title: const Text('L O G O U T'),
               onTap: () {
                 Navigator.pop(context); // Close the drawer
               },
