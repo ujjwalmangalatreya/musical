@@ -7,7 +7,7 @@ import 'package:musical_mingle/UI/screens/common_page/splash_screen.dart';
 import 'package:musical_mingle/UI/screens/common_page/tab_bar.dart';
 
 
-import 'UI/screens/musician_screens/dashboard_screen.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
