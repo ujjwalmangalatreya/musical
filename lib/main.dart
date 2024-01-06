@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:musical_mingle/screens/dashboard_screen.dart';
-import 'package:musical_mingle/screens/login_screen.dart';
-import 'package:musical_mingle/screens/register_screen.dart';
-import 'package:musical_mingle/screens/splash_screen.dart';
+
+import 'package:musical_mingle/UI/screens/common_page/login_screen.dart';
+import 'package:musical_mingle/UI/screens/common_page/register_screen.dart';
+import 'package:musical_mingle/UI/screens/common_page/splash_screen.dart';
+
+import 'UI/screens/musician_screens/dashboard_screen.dart';
 
 void main() {
   runApp(const MyApp());

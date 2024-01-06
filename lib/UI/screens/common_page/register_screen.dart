@@ -59,17 +59,12 @@ class RegisterPage extends StatelessWidget {
                   obscureText: true,
                 ),
                 // forgot password?
-              
                 const SizedBox(height: 25),
                 // sign in button
                 MyButton(onTap: () {
                   //  loginPageLogic.signUserIn(usernameController.text,passwordController.text);
                 },buttonName: "Sign Up",),
                 const SizedBox(height: 50),
-               
-              
-
-              
               ],
             ),
           ),
