@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:musical_mingle/UI/screens/musician_screens/musician_list_screen.dart';
 
 
 
@@ -11,24 +12,10 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
- 
-  int _currentIndex = 0;
-  // Define your pages/screens here
-  final List<Widget> _pages = [
-    const DashboardPage(),
-     //LoginPage(),
-    // LearnPage(),
-    // BookPage(),
-    // MorePage(),
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      appBar: AppBar(
-        backgroundColor: Colors.grey[200],
-        title: Text('Welcome !! Ujjwal Atreya..'),
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -244,72 +231,6 @@ class _DashboardPageState extends State<DashboardPage> {
               // bottom Navigation
             ],
           ),
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.grey[300],
-        selectedItemColor: Colors.black, // Color for selected item
-        unselectedItemColor: Colors.grey,
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.people),
-            label: 'Musician',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'Learn',
-          ),
-        ],
-
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'Drawer Header',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              title: Text('Item 1'),
-              onTap: () {
-                // Add your navigation logic here
-                Navigator.pop(context); // Close the drawer
-              },
-            ),
-            ListTile(
-              title: Text('Item 2'),
-              onTap: () {
-                // Add your navigation logic here
-                Navigator.pop(context); // Close the drawer
-              },
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Close Drawer'),
-              onTap: () {
-                Navigator.pop(context); // Close the drawer
-              },
-            ),
-          ],
         ),
       ),
     );
