@@ -39,9 +39,8 @@ class _DashboardPageState extends State<DashboardPage> {
                         children: [
                           Expanded(
                             child: Image.asset(
-                              'assets/your_image.png', // replace 'your_image.png' with the actual image path
-                              width: 80.0, // set the width as needed
-                              height: 80.0, // set the height as needed
+                              'assets/myband.png', // replace 'your_image.png' with the actual image path
+                                fit: BoxFit.fill,
                             ),
                           ),
                           const Text("My Band..",
@@ -69,7 +68,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               fit: BoxFit.fill,// set the height as needed
                             ),
                           ),
-                          const Text("View All Events..",style: TextStyle(
+                          const Text("My Events..",style: TextStyle(
                             color: Colors.black87,
                             fontWeight: FontWeight.bold,
                             fontSize: 16.0,
