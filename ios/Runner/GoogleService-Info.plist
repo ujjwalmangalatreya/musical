@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyADMLh6jlJChWl9kzTgbBdRQp5drPzNbHk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>529969778118</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.musicalMingle</string>
+	<key>PROJECT_ID</key>
+	<string>musical-mingle-59a4d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>musical-mingle-59a4d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:529969778118:ios:1ba9108452ce29591bf6c7</string>
+</dict>
+</plist>

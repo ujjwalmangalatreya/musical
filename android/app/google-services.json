@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "529969778118",
+    "project_id": "musical-mingle-59a4d",
+    "storage_bucket": "musical-mingle-59a4d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529969778118:android:fbe7859bcc6fa3ac1bf6c7",
+        "android_client_info": {
+          "package_name": "com.example.musical_mingle"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDxX37NiL8tG4jupqPmTqOoQEVrALuX_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

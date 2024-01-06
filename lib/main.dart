@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:musical_mingle/UI/screens/common_page/login_screen.dart';
@@ -8,7 +9,9 @@ import 'package:musical_mingle/UI/screens/common_page/tab_bar.dart';
 
 import 'UI/screens/musician_screens/dashboard_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
