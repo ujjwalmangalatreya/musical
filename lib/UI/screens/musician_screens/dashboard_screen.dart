@@ -21,7 +21,7 @@ class _DashboardPageState extends State<DashboardPage> {
               const SizedBox(
                 height: 15,
               ),
-              // Squarebox with Teams and Challenges row
+              // Squarebox with Band and Events row
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Row(
@@ -34,18 +34,22 @@ class _DashboardPageState extends State<DashboardPage> {
                       ),
                       height: 180,
                       width: 180,
-                      child: const Column(
+                      child:  Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Center(
-                            child: Icon(
-                              // TODO: add images for the card...
-                              Icons.people,
-                              color: Colors.black,
-                              size: 80.0,
+                          Expanded(
+                            child: Image.asset(
+                              'assets/your_image.png', // replace 'your_image.png' with the actual image path
+                              width: 80.0, // set the width as needed
+                              height: 80.0, // set the height as needed
                             ),
                           ),
-                          Text("Your Band..")
+                          const Text("My Band..",
+                          style: TextStyle(
+                            color: Colors.black87,
+                            fontWeight: FontWeight.bold, // Use fontWeight here
+                            fontSize: 16.0, // Use a double value for fontSize
+                          ),)
                         ],
                       ),
                     ),
@@ -56,18 +60,20 @@ class _DashboardPageState extends State<DashboardPage> {
                       ),
                       height: 180,
                       width: 180,
-                      child: const Column(
+                      child:  Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Center(
-                            child: Icon(
-                              // TODO: add images for the card...
-                              Icons.event_available,
-                              color: Colors.black,
-                              size: 80.0,
+                          Expanded(
+                            child: Image.asset(
+                              'assets/events.png', // replace 'your_image.png' with the actual image path
+                              fit: BoxFit.fill,// set the height as needed
                             ),
                           ),
-                          Text("View All Events..")
+                          const Text("View All Events..",style: TextStyle(
+                            color: Colors.black87,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.0,
+                          ),),
                         ],
                       ),
                     ),

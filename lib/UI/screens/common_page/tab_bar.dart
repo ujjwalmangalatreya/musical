@@ -3,12 +3,13 @@ import 'package:musical_mingle/UI/screens/musician_screens/learn_screen.dart';
 import 'package:musical_mingle/UI/screens/musician_screens/musician_list_screen.dart';
 import '../musician_screens/dashboard_screen.dart';
 
-
 class TabBarMenu extends StatefulWidget {
   const TabBarMenu({Key? key}) : super(key: key);
+
   @override
   State<TabBarMenu> createState() => _TabBarMenuState();
 }
+
 class _TabBarMenuState extends State<TabBarMenu> {
   int currentIndex = 0;
 
@@ -17,9 +18,10 @@ class _TabBarMenuState extends State<TabBarMenu> {
     const MusicianList(),
     const LearnMusic()
   ];
+
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[200],
         title: const Text('Welcome !! Ujjwal Atreya..'),
@@ -27,7 +29,8 @@ class _TabBarMenuState extends State<TabBarMenu> {
       body: _pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.grey[300],
-        selectedItemColor: Colors.black, // Color for selected item
+        selectedItemColor: Colors.black,
+        // Color for selected item
         unselectedItemColor: Colors.grey,
         currentIndex: currentIndex,
         onTap: (index) {
@@ -49,24 +52,18 @@ class _TabBarMenuState extends State<TabBarMenu> {
             label: 'Learn',
           ),
         ],
-
       ),
       drawer: Drawer(
-
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-             DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300
-              ),
-              child: const Center(
-                child: CircleAvatar(
-                    radius: 100, // Adjust the radius as needed
-                    backgroundImage: AssetImage('assets/M2.png')
-                ),
-              )
-            ),
+            DrawerHeader(
+                decoration: BoxDecoration(color: Colors.grey.shade300),
+                child: const Center(
+                  child: CircleAvatar(
+                      radius: 100, // Adjust the radius as needed
+                      backgroundImage: AssetImage('assets/M2.png')),
+                )),
             ListTile(
               title: const Text('P R O F I L E'),
               onTap: () {
@@ -82,12 +79,25 @@ class _TabBarMenuState extends State<TabBarMenu> {
               },
             ),
             const Divider(),
-
             ListTile(
               title: const Text('L O G O U T'),
               onTap: () {
                 Navigator.pop(context); // Close the drawer
               },
+            ),
+            const SizedBox(height: 20),
+             Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: Text(
+                  '© 2024 Musical Mingle. All rights reserved.',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey.shade700,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
