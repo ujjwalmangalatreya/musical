@@ -1,6 +1,4 @@
 
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 
 
@@ -27,32 +25,14 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
+      appBar: AppBar(
+        backgroundColor: Colors.grey[200],
+        title: Text('Welcome !! Ujjwal Atreya..'),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Header with username and setting button
-              const Padding(
-                padding: EdgeInsets.all(5.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Username with welcome !!!
-                    Text(
-                      " WelCome!! Ujjwal Atreya",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                   
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 1,
-              ),
-              const Divider(
-                color: Colors.black,
-              ),
               const SizedBox(
                 height: 15,
               ),
@@ -80,7 +60,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               size: 80.0,
                             ),
                           ),
-                          Text("Manage Your team..")
+                          Text("Your Band..")
                         ],
                       ),
                     ),
@@ -97,12 +77,12 @@ class _DashboardPageState extends State<DashboardPage> {
                           Center(
                             child: Icon(
                               // TODO: add images for the card...
-                              Icons.wifi_channel_rounded,
+                              Icons.event_available,
                               color: Colors.black,
                               size: 80.0,
                             ),
                           ),
-                          Text("View All Challenges..")
+                          Text("View All Events..")
                         ],
                       ),
                     ),
@@ -121,7 +101,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Join A game Nearby",
+                    Text("Find a musician nearby",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -178,7 +158,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Book A Venue Nearby",
+                    Text("Find a event nearby",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -246,7 +226,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           CircleAvatar(),
                           Column(
                             children: [
-                              Text("Refer a sport Enthusiast"),
+                              Text("Refer a music enthusiast"),
                               SizedBox(
                                 height: 20,
                               ),
@@ -260,43 +240,74 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
               // Applicaiton details and versions...
               //TODO: Application details and version.
-          
+
               // bottom Navigation
             ],
           ),
         ),
       ),
-      bottomNavigationBar: SafeArea(
-        child: BottomNavigationBar(
-          backgroundColor: Colors.grey[300],
-          selectedItemColor: Colors.black, // Color for selected item
-          unselectedItemColor: Colors.grey,
-          currentIndex: _currentIndex,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.grey[300],
+        selectedItemColor: Colors.black, // Color for selected item
+        unselectedItemColor: Colors.grey,
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people),
+            label: 'Musician',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'Learn',
+          ),
+        ],
+
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Drawer Header',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.sports_football),
-              label: 'Play',
+            ListTile(
+              title: Text('Item 1'),
+              onTap: () {
+                // Add your navigation logic here
+                Navigator.pop(context); // Close the drawer
+              },
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.school),
-              label: 'Learn',
+            ListTile(
+              title: Text('Item 2'),
+              onTap: () {
+                // Add your navigation logic here
+                Navigator.pop(context); // Close the drawer
+              },
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.stadium_outlined),
-              label: 'Book',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.more_horiz),
-              label: 'More',
+            Divider(),
+            ListTile(
+              title: Text('Close Drawer'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+              },
             ),
           ],
         ),
