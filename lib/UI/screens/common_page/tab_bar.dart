@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:musical_mingle/UI/screens/musician_screens/learn_screen.dart';
-import 'package:musical_mingle/UI/screens/musician_screens/musician_list_screen.dart';
-import '../musician_screens/dashboard_screen.dart';
+import 'package:musical_mingle/UI/screens/musician_screens/learn_page/learn_screen.dart';
+import 'package:musical_mingle/UI/screens/musician_screens/musician_page/musician_list_screen.dart';
+import '../musician_screens/dashboard_page/dashboard_screen.dart';
 
 
 class TabBarMenu extends StatefulWidget {

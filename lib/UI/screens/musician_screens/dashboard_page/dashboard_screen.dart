@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:musical_mingle/UI/screens/musician_screens/musician_list_screen.dart';
+import 'package:musical_mingle/UI/screens/musician_screens/musician_page/musician_list_screen.dart';
 
 
 
