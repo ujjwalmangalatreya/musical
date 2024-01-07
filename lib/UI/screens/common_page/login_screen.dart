@@ -13,6 +13,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   // text editing controllers
+  final usernameFormKey = GlobalKey<FormState>();
+  final passwordFormKey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -47,6 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                   controller: usernameController,
                   hintText: 'Email',
                   obscureText: false,
+                  formKey: usernameFormKey,
                 ),
                 const SizedBox(height: 10),
                 // password textfield
@@ -54,6 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                   controller: passwordController,
                   hintText: 'Password',
                   obscureText: true,
+                  formKey: passwordFormKey,
                 ),
                 const SizedBox(height: 10),
                 // forgot password?
@@ -71,10 +75,20 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 25),
                 // sign in button
-                MyButton(onTap: () {
-                   Navigator.pushNamed(context, '/dashboard');
-                  
-                  },buttonName: "Sign In",),
+                MyButton(
+                  onTap: () {
+                    if (usernameFormKey.currentState!.validate() &&
+                        passwordFormKey.currentState!.validate()) {
+                      // ToDo : Need to validate valid email
+                      // TODO : When the fields are validated need to signin from firebase
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Welcome Back !!!!')),
+                      );
+                      Navigator.pushNamed(context, '/dashboard');
+                    }
+                  },
+                  buttonName: "Sign In",
+                ),
                 const SizedBox(height: 50),
                 // or continue with
                 Padding(
@@ -131,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(width: 4),
                     GestureDetector(
                       onTap: () {
-                       Navigator.pushNamed(context, '/register');
+                        Navigator.pushNamed(context, '/register');
                       },
                       child: const Text(
                         'Register now',

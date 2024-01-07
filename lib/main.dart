@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'package:musical_mingle/UI/screens/common_page/login_screen.dart';
 import 'package:musical_mingle/UI/screens/common_page/register_screen.dart';
 import 'package:musical_mingle/UI/screens/common_page/splash_screen.dart';
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Musical Mingle',
       routes:  {
         '/login': (context) => const LoginPage(),
-        '/register' :(context) => const RegisterPage(),
+        '/register' :(context) =>  RegisterPage(),
         '/dashboard' :(context) => const TabBarMenu(),
       },
       initialRoute: '/',

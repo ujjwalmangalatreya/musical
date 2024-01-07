@@ -4,7 +4,14 @@ import '../common_widgets/my_button.dart';
 import '../common_widgets/my_textfield.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+  RegisterPage({super.key});
+
+  final emailFormKey = GlobalKey<FormState>();
+  final passwordFormKey = GlobalKey<FormState>();
+  final confirmPasswordFormKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,31 +46,46 @@ class RegisterPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 25),
                 // username textfield
-                const MyTextField(
-                  controller: null,
+                MyTextField(
+                  controller: emailController,
                   hintText: 'Email',
                   obscureText: false,
+                  formKey: emailFormKey,
                 ),
                 const SizedBox(height: 10),
                 // password textfield
-                const MyTextField(
-                  controller: null,
+                MyTextField(
+                  controller: passwordController,
                   hintText: 'Password',
                   obscureText: true,
+                  formKey: passwordFormKey,
                 ),
                 const SizedBox(height: 10),
                 // confirm password field
-                const MyTextField(
-                  controller: null,
+                MyTextField(
+                  controller: confirmPasswordController,
                   hintText: 'Confirm Password',
                   obscureText: true,
+                  formKey: confirmPasswordFormKey,
                 ),
                 // forgot password?
                 const SizedBox(height: 25),
-                // sign in button
-                MyButton(onTap: () {
-                  //  loginPageLogic.signUserIn(usernameController.text,passwordController.text);
-                },buttonName: "Sign Up",),
+                // sign Up button
+                MyButton(
+                  onTap: () {
+                    if (emailFormKey.currentState!.validate() &&
+                        passwordFormKey.currentState!.validate() &&
+                        confirmPasswordFormKey.currentState!.validate()) {
+                      // TODO : Now need to validate if password and confirm password are same
+                      // TODO : Need to validate string password.
+                      // TODO : When all the validation passes then post data to firebase
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Processing Data')),
+                      );
+                    }
+                  },
+                  buttonName: "Sign Up",
+                ),
                 const SizedBox(height: 50),
               ],
             ),
