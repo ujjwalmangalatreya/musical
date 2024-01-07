@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 class MyTextField extends StatelessWidget {
@@ -50,7 +51,7 @@ class MyTextField extends StatelessWidget {
                   filled: true,
                   hintText: hintText,
                   suffixIcon: IconButton(
-                    icon: const Icon(Icons.volume_up),
+                    icon:  Icon(hintText == "Email" ? Icons.email_outlined : Icons.remove_red_eye_outlined),
 
                     onPressed: () {
 
