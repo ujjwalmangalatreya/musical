@@ -49,6 +49,13 @@ class MyTextField extends StatelessWidget {
                   fillColor: Colors.grey.shade200,
                   filled: true,
                   hintText: hintText,
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.volume_up),
+
+                    onPressed: () {
+
+                    },
+                  ),
                   hintStyle: TextStyle(color: Colors.grey[500])),
             ),
           ],
