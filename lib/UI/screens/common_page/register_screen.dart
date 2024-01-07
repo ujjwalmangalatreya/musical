@@ -76,6 +76,14 @@ class RegisterPage extends StatelessWidget {
                     if (emailFormKey.currentState!.validate() &&
                         passwordFormKey.currentState!.validate() &&
                         confirmPasswordFormKey.currentState!.validate()) {
+                      if (passwordController.text !=
+                          confirmPasswordController.text) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Password do not match...'),
+                          ),
+                        );
+                      }
                       // TODO : Now need to validate if password and confirm password are same
                       // TODO : Need to validate string password.
                       // TODO : When all the validation passes then post data to firebase

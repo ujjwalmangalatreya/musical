@@ -28,6 +28,14 @@ class MyTextField extends StatelessWidget {
                 if (value == null || value.isEmpty) {
                   return "Please enter $hintText";
                 }
+                // Check if the entered value is a valid email using regex
+                String emailRegex = r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$';
+                RegExp regex = RegExp(emailRegex);
+                if(hintText == "Email") {
+                  if (!regex.hasMatch(value)) {
+                    return 'Enter a valid email address';
+                  }
+                }
                 // Add additional validation logic if needed
                 return null;
               },
