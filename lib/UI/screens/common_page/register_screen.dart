@@ -83,13 +83,14 @@ class RegisterPage extends StatelessWidget {
                             content: Text('Password do not match...'),
                           ),
                         );
+                      }else{
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Processing Data')),
+                        );
                       }
                       // TODO : Now need to validate if password and confirm password are same
                       // TODO : Need to validate string password.
                       // TODO : When all the validation passes then post data to firebase
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing Data')),
-                      );
                     }
                   },
                   buttonName: "Sign Up",
