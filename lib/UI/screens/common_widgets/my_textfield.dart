@@ -52,7 +52,6 @@ class MyTextField extends StatelessWidget {
                   hintText: hintText,
                   suffixIcon: IconButton(
                     icon:  Icon(hintText == "Email" ? Icons.email_outlined : Icons.remove_red_eye_outlined),
-
                     onPressed: () {
 
                     },
