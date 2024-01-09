@@ -23,7 +23,6 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
           email: event.registrationModel.email,
           password: event.registrationModel.password,
         );
-
         // Simulating success for now
         yield RegistrationSuccessState();
       } catch (e) {
