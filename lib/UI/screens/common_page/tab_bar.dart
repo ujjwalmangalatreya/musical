@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musical_mingle/UI/screens/musician_screens/learn_screen.dart';
 import 'package:musical_mingle/UI/screens/musician_screens/musician_list_screen.dart';
+import 'package:musical_mingle/blocs/auth/auth_bloc.dart';
 import '../musician_screens/dashboard_screen.dart';
 
 class TabBarMenu extends StatefulWidget {
-  const TabBarMenu({Key? key}) : super(key: key);
+  const TabBarMenu({Key? key, required this.user}) : super(key: key);
+  final User? user;
 
   @override
   State<TabBarMenu> createState() => _TabBarMenuState();
@@ -24,7 +28,7 @@ class _TabBarMenuState extends State<TabBarMenu> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[200],
-        title: const Text('Welcome !! Ujjwal Atreya..'),
+        title: Text('Welcome ${widget.user?.email ?? "Guest"}'),
       ),
       body: _pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -82,11 +86,12 @@ class _TabBarMenuState extends State<TabBarMenu> {
             ListTile(
               title: const Text('L O G O U T'),
               onTap: () {
-                Navigator.pop(context); // Close the drawer
+                context.read<AuthBloc>().add(SignOutEvent());
+
               },
             ),
             const SizedBox(height: 20),
-             Padding(
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Align(
                 alignment: Alignment.bottomLeft,

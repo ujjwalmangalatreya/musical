@@ -18,7 +18,8 @@ class SplashScreen extends StatelessWidget {
               stream: FirebaseAuth.instance.authStateChanges(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return const TabBarMenu();
+                  User? user = snapshot.data;
+                  return  TabBarMenu( user: user,);
                 } else {
                   return const LoginPage();
                 }
