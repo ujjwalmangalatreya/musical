@@ -98,7 +98,6 @@ class _TabBarMenuState extends State<TabBarMenu> {
               title: const Text('L O G O U T'),
               onTap: () {
                 context.read<AuthBloc>().add(SignOutEvent());
-
               },
             ),
             const SizedBox(height: 20),

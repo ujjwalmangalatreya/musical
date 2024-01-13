@@ -16,14 +16,16 @@ class AuthRepository {
   }
 
   // Function to sign in a user
-  Future<void> signInUser(String email, String password) async {
+  Future<UserCredential?> signInUser(String email, String password) async {
     try {
       final credentials = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       print('Sign-in successful: ${credentials.user?.uid}');
+      return credentials;
     } catch (e) {
-      handleAuthException(e);
+      rethrow;
     }
+    return null;
   }
 
   Future<void> signOut()async {

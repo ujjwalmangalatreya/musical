@@ -1,12 +1,10 @@
-
-
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:musical_mingle/repositories/auth_repositories.dart';
 
 part 'auth_event.dart';
+
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
@@ -17,7 +15,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthInProgress());
       try {
         UserCredential? userCredential =
-        (await authRepository. registerUser(event.email, event.password));
+            (await authRepository.registerUser(event.email, event.password));
         User? user = userCredential?.user;
 
         emit(AuthSuccessful(user: user));
@@ -38,6 +36,28 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthFailed(failedErrorMessage: e.toString()));
       }
     });
-  }
 
+    on<SignInEvent>((event, emit) async {
+      emit(AuthInProgress());
+      try {
+        UserCredential? userCredential =
+        (await authRepository.signInUser(event.email, event.password)) as UserCredential?;
+        emit(AuthSuccessful(user: userCredential?.user));
+      } catch (e) {
+        if (e is FirebaseAuthException) {
+          if (e.code == 'user-not-found') {
+            emit(const AuthFailed(failedErrorMessage: 'User not found'));
+          } else if (e.code == 'wrong-password') {
+            emit(const AuthFailed(failedErrorMessage: 'Wrong password'));
+          } else {
+            emit(AuthFailed(failedErrorMessage: 'Sign-in failed: ${e.message}'));
+          }
+        } else {
+          emit(AuthFailed(failedErrorMessage: 'Sign-in failed: ${e.toString()}'));
+        }
+      }
+    });
+
+
+  }
 }
