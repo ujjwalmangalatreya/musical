@@ -62,12 +62,23 @@ class _TabBarMenuState extends State<TabBarMenu> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-                decoration: BoxDecoration(color: Colors.grey.shade300),
-                child: const Center(
-                  child: CircleAvatar(
-                      radius: 100, // Adjust the radius as needed
-                      backgroundImage: AssetImage('assets/M2.png')),
-                )),
+              decoration: BoxDecoration(color: Colors.grey.shade300),
+              child:  Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const CircleAvatar(
+                    radius: 50, // Adjust the radius as needed
+                    backgroundImage: AssetImage('assets/M2.png'),
+                  ),
+                  const SizedBox(height: 10), // Adjust the spacing as needed
+                  Text(
+                    '${widget.user?.email}',
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+
             ListTile(
               title: const Text('P R O F I L E'),
               onTap: () {
