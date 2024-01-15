@@ -9,10 +9,8 @@ class AuthRepository {
       print('Registration successful: $user');
       return user;
     } catch (e) {
-      handleAuthException(e);
+      rethrow;
     }
-    return null;
-
   }
 
   // Function to sign in a user

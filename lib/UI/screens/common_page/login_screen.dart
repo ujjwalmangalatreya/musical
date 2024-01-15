@@ -30,7 +30,21 @@ class _LoginPageState extends State<LoginPage> {
         }else if(state is AuthSuccessful){
           return TabBarMenu(user: state.user);
         }else if(state is AuthFailed){
-          return const Center(child: Text("Auth Failed"),);
+          return  Center(
+              child: AlertDialog(
+                title: const Text("Authentication Failed.."),
+                content: Text((state).failedErrorMessage),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context); // Close the dialog
+                    },
+                    child: const Text('Close'),
+                  ),
+                ],
+              )
+            //Text((state as AuthFailed).failedErrorMessage),
+          );
         }else {
           return Scaffold(
             backgroundColor: Colors.grey[300],

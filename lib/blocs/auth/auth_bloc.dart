@@ -16,16 +16,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         UserCredential? userCredential =
             (await authRepository.registerUser(event.email, event.password));
-        User? user = userCredential?.user;
-
-        emit(AuthSuccessful(user: user));
+        emit(AuthSuccessful(user:userCredential?.user));
       } catch (e) {
         emit(AuthFailed(failedErrorMessage: e.toString()));
       }
     });
 
     on<SignOutEvent>((event, emit) async {
-      emit(SignOutProgress());
+      emit(AuthInProgress());
       try {
         // Perform the sign-out logic here
         await authRepository.signOut();
@@ -41,7 +39,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthInProgress());
       try {
         UserCredential? userCredential =
-        (await authRepository.signInUser(event.email, event.password)) as UserCredential?;
+        (await authRepository.signInUser(event.email, event.password));
         emit(AuthSuccessful(user: userCredential?.user));
       } catch (e) {
         if (e is FirebaseAuthException) {
