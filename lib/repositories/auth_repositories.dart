@@ -1,13 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:musical_mingle/models/user_model.dart';
 
 class AuthRepository {
   // Function to register a user
-  Future<UserCredential?> registerUser(String email, String password) async {
+  Future<UserCredential> registerUser(String email, String password) async {
     try {
-       final user = (await FirebaseAuth.instance
+       final userCredential = (await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password));
-      print('Registration successful: $user');
-      return user;
+      // Add user details to firebase firestore
+       final userData = UserModel(
+           id: userCredential.user!.uid,
+           email: userCredential.user?.email,
+           displayName: userCredential.user?.displayName,
+           pictureUrl: userCredential.user?.displayName,
+       );
+       await FirebaseFirestore.instance.collection('users').doc(userCredential.user?.uid)
+           .set(userData.toJson());
+      return userCredential;
     } catch (e) {
       rethrow;
     }
@@ -18,12 +28,11 @@ class AuthRepository {
     try {
       final credentials = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      print('Sign-in successful: ${credentials.user?.uid}');
+
       return credentials;
     } catch (e) {
       rethrow;
     }
-    return null;
   }
 
   Future<void> signOut()async {
@@ -31,21 +40,5 @@ class AuthRepository {
   }
 
   // Function to handle FirebaseAuthException
-  void handleAuthException(dynamic e) {
-    if (e is FirebaseAuthException) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      } else if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      } else {
-        print('Authentication error: ${e.code}');
-      }
-    } else {
-      print('Authentication error: $e');
-    }
-  }
+
 }

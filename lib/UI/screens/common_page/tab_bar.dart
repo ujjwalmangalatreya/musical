@@ -28,7 +28,7 @@ class _TabBarMenuState extends State<TabBarMenu> {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        if(state is AuthInProgress){
+        if(state is SignOutProgress){
           return const Center(child: CircularProgressIndicator(),);
         }else if(state is SignOutComplete){
           return const LoginPage();
@@ -36,7 +36,7 @@ class _TabBarMenuState extends State<TabBarMenu> {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.grey[200],
-              title: Text('Welcome ${widget.user?.email ?? "Guest"}'),
+              title: Text('Welcome ${widget.user?.displayName ?? "Guest"}'),
             ),
             body: _pages[currentIndex],
             bottomNavigationBar: BottomNavigationBar(
@@ -130,8 +130,7 @@ class _TabBarMenuState extends State<TabBarMenu> {
           );
         }else {
           //TODO :  I need to create a UI if something went wrong and user can navigate back and retry
-          return const Center(child: Text("Something went wrong.."),);
-        }
+          return const LoginPage();}
       },
     );
   }
