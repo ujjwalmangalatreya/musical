@@ -82,7 +82,7 @@ class _TabBarMenuState extends State<TabBarMenu> {
                         const SizedBox(height: 10),
                         // Adjust the spacing as needed
                         Text(
-                          'MyName',
+                          '${state.userData?.displayName}',
                           style: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
