@@ -17,12 +17,12 @@ class AuthInProgress extends AuthState {
 }
 
 class AuthSuccessful extends AuthState {
-  final User? user;
+  final UserModel? userData;
 
-  const AuthSuccessful({required this.user});
+  const AuthSuccessful({required this.userData});
 
   @override
-  List<Object?> get props => [user];
+  List<Object?> get props => [userData];
 
 }
 

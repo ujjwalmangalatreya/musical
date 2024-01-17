@@ -31,7 +31,7 @@ class RegisterPage extends StatelessWidget {
                 child: Text((state as AuthFailed).failedErrorMessage),
               );
             case AuthSuccessful:
-              return TabBarMenu(user: (state as AuthSuccessful).user);
+              return TabBarMenu(userData: null);
             default:
               return SafeArea(
                 child: SingleChildScrollView(

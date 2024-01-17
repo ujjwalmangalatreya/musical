@@ -5,11 +5,12 @@ import 'package:musical_mingle/UI/screens/common_page/login_screen.dart';
 import 'package:musical_mingle/UI/screens/musician_screens/learn_screen.dart';
 import 'package:musical_mingle/UI/screens/musician_screens/musician_list_screen.dart';
 import 'package:musical_mingle/blocs/auth/auth_bloc.dart';
+import 'package:musical_mingle/models/user_model.dart';
 import '../musician_screens/dashboard_screen.dart';
 
 class TabBarMenu extends StatefulWidget {
-  const TabBarMenu({Key? key, required this.user}) : super(key: key);
-  final User? user;
+  const TabBarMenu({Key? key, required this.userData}) : super(key: key);
+  final UserModel? userData;
 
   @override
   State<TabBarMenu> createState() => _TabBarMenuState();
@@ -36,7 +37,7 @@ class _TabBarMenuState extends State<TabBarMenu> {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.grey[200],
-              title: Text('Welcome ${widget.user?.displayName ?? "Guest"}'),
+              title:  Text('Welcome ${state.userData?.displayName}'),
             ),
             body: _pages[currentIndex],
             bottomNavigationBar: BottomNavigationBar(
@@ -81,7 +82,7 @@ class _TabBarMenuState extends State<TabBarMenu> {
                         const SizedBox(height: 10),
                         // Adjust the spacing as needed
                         Text(
-                          '${widget.user?.email}',
+                          'MyName',
                           style: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),

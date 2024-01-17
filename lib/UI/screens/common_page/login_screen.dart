@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
         if(state is AuthInProgress){
           return const Center(child: CircularProgressIndicator(),);
         }else if(state is AuthSuccessful){
-          return TabBarMenu(user: state.user);
+          return TabBarMenu(userData: state.userData,);
         }else if(state is AuthFailed){
           return  Center(
               child: AlertDialog(

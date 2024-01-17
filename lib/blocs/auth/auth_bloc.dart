@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:musical_mingle/models/user_model.dart';
 import 'package:musical_mingle/repositories/auth_repositories.dart';
+import 'package:musical_mingle/repositories/user_details_repositories.dart';
 
 part 'auth_event.dart';
 
@@ -9,6 +11,7 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthRepository authRepository = AuthRepository();
+  UserDetailsRepositories userDetailsRepositories = UserDetailsRepositories();
 
   AuthBloc() : super(AuthInitial()) {
     on<SignUpEvent>((event, emit) async {
@@ -16,7 +19,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         UserCredential? userCredential =
             (await authRepository.registerUser(event.email, event.password));
-        emit(AuthSuccessful(user:userCredential?.user));
+        UserModel? userModel = await userDetailsRepositories
+            .getUserDetails(userCredential.user?.uid);
+        emit(AuthSuccessful(userData: userModel));
       } catch (e) {
         emit(AuthFailed(failedErrorMessage: e.toString()));
       }
@@ -40,7 +45,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         UserCredential? userCredential =
         (await authRepository.signInUser(event.email, event.password));
-        emit(AuthSuccessful(user: userCredential?.user));
+        UserModel userModel = await userDetailsRepositories.getUserDetails(userCredential?.user?.uid);
+        emit(AuthSuccessful(userData: userModel));
       } catch (e) {
         if (e is FirebaseAuthException) {
           if (e.code == 'user-not-found') {
