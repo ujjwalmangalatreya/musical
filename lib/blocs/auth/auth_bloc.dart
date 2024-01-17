@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:musical_mingle/models/user_model.dart';
@@ -61,6 +62,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         }
       }
     });
+
+    on<UserLoggedInEvent>((event, emit) async {
+      emit(AuthInProgress());
+      try {
+        UserModel userModel = await userDetailsRepositories
+            .getUserDetails(event.uid);
+        emit(AuthSuccessful(userData: userModel));
+      } catch (e) {
+        // If an error occurs during sign-out, dispatch AuthFailed state
+        emit(AuthFailed(failedErrorMessage: e.toString()));
+      }
+    });
+    
 
 
   }

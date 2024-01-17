@@ -49,3 +49,13 @@ class SignOutComplete extends AuthState {
   List<Object?> get props => [];
 
 }
+
+class UserLoggedInState extends AuthState{
+  final UserModel userModel;
+
+  const UserLoggedInState(this.userModel);
+  @override
+  // TODO: implement props
+  List<Object?> get props => [userModel];
+
+}
