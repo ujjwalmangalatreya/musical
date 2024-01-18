@@ -7,7 +7,7 @@ class RegisterUserEvent extends RegistrationEvent{
 
   final RegistrationModel registrationModel;
 
-  RegisterUserEvent(this.registrationModel);
+  const RegisterUserEvent(this.registrationModel);
 
   @override
   // TODO: implement props

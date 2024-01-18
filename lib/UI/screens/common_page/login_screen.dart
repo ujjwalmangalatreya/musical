@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        if(state is AuthInProgress || state is SignOutProgress){
+        if(state is AuthInProgress){
           return const Center(child: CircularProgressIndicator(),);
         }else if(state is AuthSuccessful){
           return TabBarMenu(userData: state.userData,);
@@ -46,6 +46,7 @@ class _LoginPageState extends State<LoginPage> {
             //Text((state as AuthFailed).failedErrorMessage),
           );
         }else {
+          print(state);
           return Scaffold(
             backgroundColor: Colors.grey[300],
             body: SafeArea(
