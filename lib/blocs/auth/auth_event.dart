@@ -36,7 +36,7 @@ class SignOutEvent extends AuthEvent{
 class UserLoggedInEvent extends AuthEvent{
   final String uid;
 
-  UserLoggedInEvent(this.uid);
+  const UserLoggedInEvent(this.uid);
   @override
   // TODO: implement props
   List<Object?> get props => [uid];

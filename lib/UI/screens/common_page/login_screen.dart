@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        if(state is AuthInProgress){
+        if(state is AuthInProgress || state is SignOutProgress){
           return const Center(child: CircularProgressIndicator(),);
         }else if(state is AuthSuccessful){
           return TabBarMenu(userData: state.userData,);

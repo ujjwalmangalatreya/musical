@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/login': (context) => const LoginPage(),
           '/register': (context) => RegisterPage(),
-          '/dashboard': (context) =>  const TabBarMenu( userData: null,),
+          '/dashboard': (context) =>   const TabBarMenu( userData: null,),
         },
         initialRoute: '/',
         theme: ThemeData(

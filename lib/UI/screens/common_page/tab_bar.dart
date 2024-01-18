@@ -32,6 +32,7 @@ class _TabBarMenuState extends State<TabBarMenu> {
         if(state is SignOutProgress){
           return const Center(child: CircularProgressIndicator(),);
         }else if(state is SignOutComplete){
+          print("Signout Completed if condigion....");
           return const LoginPage();
         }else if(state is AuthSuccessful) {
           return Scaffold(

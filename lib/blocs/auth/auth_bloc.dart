@@ -29,7 +29,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     on<SignOutEvent>((event, emit) async {
-      emit(AuthInProgress());
+      emit(SignOutProgress());
       try {
         // Perform the sign-out logic here
         await authRepository.signOut();

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musical_mingle/UI/screens/common_page/tab_bar.dart';
@@ -6,6 +5,7 @@ import 'package:musical_mingle/UI/screens/common_page/tab_bar.dart';
 import '../../../blocs/auth/auth_bloc.dart';
 import '../common_widgets/my_button.dart';
 import '../common_widgets/my_textfield.dart';
+import 'login_screen.dart';
 
 class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
@@ -31,7 +31,9 @@ class RegisterPage extends StatelessWidget {
                 child: Text((state as AuthFailed).failedErrorMessage),
               );
             case AuthSuccessful:
-              return TabBarMenu(userData: null);
+              return const TabBarMenu(userData: null);
+            case SignOutComplete:
+              return const LoginPage();
             default:
               return SafeArea(
                 child: SingleChildScrollView(
