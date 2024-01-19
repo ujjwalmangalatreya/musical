@@ -1,10 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musical_mingle/UI/screens/common_page/login_screen.dart';
 import 'package:musical_mingle/UI/screens/common_page/tab_bar.dart';
-import 'package:musical_mingle/UI/screens/musician_screens/dashboard_screen.dart';
-import 'package:musical_mingle/blocs/auth/auth_bloc.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -20,7 +17,7 @@ class SplashScreen extends StatelessWidget {
               stream: FirebaseAuth.instance.authStateChanges(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  User? user = snapshot.data;
+                 // TODO : Need to if the snapshot has data neex to validate user and get the user data
                  // context.read<AuthBloc>().add(UserLoggedInEvent(user!.uid));
                   return  const TabBarMenu(userData: null,);
                 } else {
