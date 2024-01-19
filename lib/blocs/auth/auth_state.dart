@@ -4,32 +4,32 @@ abstract class AuthState extends Equatable {
   const AuthState();
 }
 
-class AuthInitial extends AuthState {
+class SignInInitial extends AuthState {
   @override
   List<Object> get props => [];
 }
 
-class AuthInProgress extends AuthState {
+class SignInProgress extends AuthState {
   @override
   // TODO: implement props
   List<Object?> get props => [];
 
 }
 
-class AuthSuccessful extends AuthState {
+class SignInSuccessful extends AuthState {
   final UserModel? userData;
 
-  const AuthSuccessful({required this.userData});
+  const SignInSuccessful({required this.userData});
 
   @override
   List<Object?> get props => [userData];
 
 }
 
-class AuthFailed extends AuthState {
+class SignInFailed extends AuthState {
   final String failedErrorMessage;
 
-  const AuthFailed({required this.failedErrorMessage});
+  const SignInFailed({required this.failedErrorMessage});
 
   @override
   List<Object?> get props => [failedErrorMessage];

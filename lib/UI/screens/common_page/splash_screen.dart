@@ -21,7 +21,7 @@ class SplashScreen extends StatelessWidget {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   User? user = snapshot.data;
-                  context.read<AuthBloc>().add(UserLoggedInEvent(user!.uid));
+                 // context.read<AuthBloc>().add(UserLoggedInEvent(user!.uid));
                   return  const TabBarMenu(userData: null,);
                 } else {
                   return const LoginPage();

@@ -13,19 +13,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthRepository authRepository = AuthRepository();
   UserDetailsRepositories userDetailsRepositories = UserDetailsRepositories();
 
-  AuthBloc() : super(AuthInitial()) {
-    on<SignUpEvent>((event, emit) async {
-      emit(AuthInProgress());
-      try {
-        UserCredential? userCredential =
-            (await authRepository.registerUser(event.email, event.password));
-        UserModel? userModel = await userDetailsRepositories
-            .getUserDetails(userCredential.user?.uid);
-        emit(AuthSuccessful(userData: userModel));
-      } catch (e) {
-        emit(AuthFailed(failedErrorMessage: e.toString()));
-      }
-    });
+  AuthBloc() : super(SignInInitial()) {
 
     on<SignOutEvent>((event, emit) async {
       emit(SignOutProgress());
@@ -36,45 +24,44 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(SignOutComplete());
       } catch (e) {
         // If an error occurs during sign-out, dispatch AuthFailed state
-        emit(AuthFailed(failedErrorMessage: e.toString()));
+        emit(SignInFailed(failedErrorMessage: e.toString()));
       }
     });
 
     on<SignInEvent>((event, emit) async {
-      emit(AuthInProgress());
+      emit(SignInProgress());
       try {
         UserCredential? userCredential =
             (await authRepository.signInUser(event.email, event.password));
         UserModel userModel = await userDetailsRepositories
             .getUserDetails(userCredential?.user?.uid);
-        emit(AuthSuccessful(userData: userModel));
+        emit(SignInSuccessful(userData: userModel));
       } catch (e) {
         if (e is FirebaseAuthException) {
           if (e.code == 'user-not-found') {
-            emit(const AuthFailed(failedErrorMessage: 'User not found'));
+            emit(const SignInFailed(failedErrorMessage: 'User Not Found..'));
           } else if (e.code == 'wrong-password') {
-            emit(const AuthFailed(failedErrorMessage: 'Wrong password'));
+            emit(const SignInFailed(failedErrorMessage: 'Wrong Password.. '));
           } else {
             emit(
-                AuthFailed(failedErrorMessage: 'Sign-in failed: ${e.message}'));
+                const SignInFailed(failedErrorMessage: 'Something Went Wrong.. '));
           }
         } else {
-          emit(AuthFailed(
-              failedErrorMessage: 'Sign-in failed: ${e.toString()}'));
+          emit(SignInFailed(failedErrorMessage: e.toString()));
         }
       }
     });
 
-    on<UserLoggedInEvent>((event, emit) async {
-      emit(AuthInProgress());
-      try {
-        UserModel userModel =
-            await userDetailsRepositories.getUserDetails(event.uid);
-        emit(AuthSuccessful(userData: userModel));
-      } catch (e) {
-        // If an error occurs during sign-out, dispatch AuthFailed state
-        emit(AuthFailed(failedErrorMessage: e.toString()));
-      }
-    });
+    // on<UserLoggedInEvent>((event, emit) async {
+    //   emit(AuthInProgress());
+    //   try {
+    //     UserModel userModel =
+    //         await userDetailsRepositories.getUserDetails(event.uid);
+    //     emit(AuthSuccessful(userData: userModel));
+    //   } catch (e) {
+    //     // If an error occurs during sign-out, dispatch AuthFailed state
+    //     emit(AuthFailed(failedErrorMessage: e.toString()));
+    //   }
+    // });
   }
 }
