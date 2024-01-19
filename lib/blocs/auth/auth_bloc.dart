@@ -14,7 +14,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   UserDetailsRepositories userDetailsRepositories = UserDetailsRepositories();
 
   AuthBloc() : super(SignInInitial()) {
-
     on<SignOutEvent>((event, emit) async {
       emit(SignOutProgress());
       try {
@@ -43,14 +42,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           } else if (e.code == 'wrong-password') {
             emit(const SignInFailed(failedErrorMessage: 'Wrong Password.. '));
           } else {
-            emit(
-                const SignInFailed(failedErrorMessage: 'Something Went Wrong.. '));
+            emit(const SignInFailed(
+                failedErrorMessage: 'Something Went Wrong.. '));
           }
         } else {
           emit(SignInFailed(failedErrorMessage: e.toString()));
         }
       }
     });
-
   }
 }

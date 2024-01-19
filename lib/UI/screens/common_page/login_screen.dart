@@ -45,12 +45,12 @@ class _LoginPageState extends State<LoginPage> {
         },
         child: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
-            if (state is SignInSuccessful) {
-              return const TabBarMenu( userData: null,);
+            if (state is  SignInProgress) {
+              return const Loader();
             }else if (state is SignInFailed) {
               return const LoginPage();
-            }else if(state is SignInProgress){
-              return const Loader();
+            }else if(state is SignInSuccessful){
+              return const TabBarMenu( userData: null,);
             }
             return SafeArea(
               child: SingleChildScrollView(
