@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:musical_mingle/models/user_model.dart';
@@ -45,8 +44,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthInProgress());
       try {
         UserCredential? userCredential =
-        (await authRepository.signInUser(event.email, event.password));
-        UserModel userModel = await userDetailsRepositories.getUserDetails(userCredential?.user?.uid);
+            (await authRepository.signInUser(event.email, event.password));
+        UserModel userModel = await userDetailsRepositories
+            .getUserDetails(userCredential?.user?.uid);
         emit(AuthSuccessful(userData: userModel));
       } catch (e) {
         if (e is FirebaseAuthException) {
@@ -55,10 +55,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           } else if (e.code == 'wrong-password') {
             emit(const AuthFailed(failedErrorMessage: 'Wrong password'));
           } else {
-            emit(AuthFailed(failedErrorMessage: 'Sign-in failed: ${e.message}'));
+            emit(
+                AuthFailed(failedErrorMessage: 'Sign-in failed: ${e.message}'));
           }
         } else {
-          emit(AuthFailed(failedErrorMessage: 'Sign-in failed: ${e.toString()}'));
+          emit(AuthFailed(
+              failedErrorMessage: 'Sign-in failed: ${e.toString()}'));
         }
       }
     });
@@ -66,16 +68,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<UserLoggedInEvent>((event, emit) async {
       emit(AuthInProgress());
       try {
-        UserModel userModel = await userDetailsRepositories
-            .getUserDetails(event.uid);
+        UserModel userModel =
+            await userDetailsRepositories.getUserDetails(event.uid);
         emit(AuthSuccessful(userData: userModel));
       } catch (e) {
         // If an error occurs during sign-out, dispatch AuthFailed state
         emit(AuthFailed(failedErrorMessage: e.toString()));
       }
     });
-    
-
-
   }
 }

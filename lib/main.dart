@@ -7,6 +7,7 @@ import 'package:musical_mingle/UI/screens/common_page/splash_screen.dart';
 import 'package:musical_mingle/UI/screens/common_page/tab_bar.dart';
 
 import 'blocs/auth/auth_bloc.dart';
+import 'blocs/registration/registration_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers:[
+        BlocProvider<RegistrationBloc>(create: (context) => RegistrationBloc()),
         BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
       ],
 

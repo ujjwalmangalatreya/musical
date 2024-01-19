@@ -4,31 +4,32 @@ abstract class RegistrationState extends Equatable {
   const RegistrationState();
 }
 
-
-class RegistrationInitialState extends RegistrationState {
+class RegistrationInitial extends RegistrationState {
   @override
   // TODO: implement props
   List<Object?> get props => [];
 }
 
-class RegistrationLoadingState extends RegistrationState {
+class RegistrationLoading extends RegistrationState {
   @override
   // TODO: implement props
   List<Object?> get props => [];
 }
 
-class RegistrationSuccessState extends RegistrationState {
+class RegistrationSuccess extends RegistrationState {
+  final RegistrationModel registrationModel;
+
+  const RegistrationSuccess(this.registrationModel);
   @override
-  // TODO: implement props
   List<Object?> get props => [];
 }
 
-class RegistrationErrorState extends RegistrationState {
+class RegistrationError extends RegistrationState {
   final String error;
 
-  const RegistrationErrorState(this.error);
+  const RegistrationError(this.error);
 
   @override
   // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [error];
 }
