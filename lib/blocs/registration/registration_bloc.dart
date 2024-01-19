@@ -1,8 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../models/registraion_model.dart';
+import 'package:musical_mingle/models/user_model.dart';
+
 import '../../repositories/RegistrationRepository.dart';
+
 part 'registration_event.dart';
+
 part 'registration_state.dart';
 
 class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
@@ -12,9 +15,9 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
           RegistrationRepository();
       emit(RegistrationLoading());
       try {
-        RegistrationModel registrationModel = await registrationRepository
-            .registerUser(event.email, event.password);
-        emit(RegistrationSuccess(registrationModel));
+        UserModel userModel = await registrationRepository.registerUser(
+            event.email, event.password);
+        emit(RegistrationSuccess(userModel));
       } catch (e) {
         emit(RegistrationError(e.toString()));
       }

@@ -17,11 +17,11 @@ class RegistrationLoading extends RegistrationState {
 }
 
 class RegistrationSuccess extends RegistrationState {
-  final RegistrationModel registrationModel;
+  final UserModel userModel;
 
-  const RegistrationSuccess(this.registrationModel);
+  const RegistrationSuccess(this.userModel);
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [userModel];
 }
 
 class RegistrationError extends RegistrationState {

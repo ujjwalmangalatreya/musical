@@ -1,23 +1,36 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:musical_mingle/models/registraion_model.dart';
+
+
+import '../models/user_model.dart';
 
 class RegistrationRepository {
   // Function to register a user
-  Future<RegistrationModel> registerUser(String email, String password) async {
+  Future<UserModel> registerUser(String email, String password) async {
     try {
-      final userCredential = (await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password));
+      final userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
 
-      final userData = RegistrationModel(
-        id: userCredential.user!.uid,
-        email: userCredential.user?.email,
-        displayName: userCredential.user?.displayName,
-        pictureUrl: userCredential.user?.displayName,
+      // Add user details to Firebase Firestore
+      final userModel = UserModel(
+        isNewUser: true,
+        email: userCredential.user?.email ?? '',
+        isEmailVerified: userCredential.user?.emailVerified ?? false,
+        creationTime: userCredential.user?.metadata.creationTime ?? DateTime.now(),
+        lastSignInTime: userCredential.user?.metadata.lastSignInTime ?? DateTime.now(),
+        profile: {},
+        displayName: userCredential.user?.displayName ?? '',
+        phoneNumber: userCredential.user?.phoneNumber ?? '',
+        photoURL: userCredential.user?.photoURL ?? '',
+        providerId: userCredential.additionalUserInfo?.providerId ?? '',
+        uid: userCredential.user?.uid ?? '',
+        refreshToken: userCredential.user?.refreshToken ?? '',
       );
+
       await FirebaseFirestore.instance.collection('users').doc(userCredential.user?.uid)
-          .set(userData.toJson());
-      return userData;
+          .set(userModel.toJson());
+
+      return userModel;
     } catch (e) {
       rethrow;
     }
