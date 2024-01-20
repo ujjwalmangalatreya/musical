@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musical_mingle/UI/screens/common_page/login_screen.dart';
 import 'package:musical_mingle/UI/screens/common_page/register_screen.dart';
 import 'package:musical_mingle/UI/screens/common_page/splash_screen.dart';
-import 'package:musical_mingle/UI/screens/common_page/tab_bar.dart';
 
 import 'blocs/auth/auth_bloc.dart';
 import 'blocs/registration/registration_bloc.dart';
@@ -33,7 +32,6 @@ class MyApp extends StatelessWidget {
         routes: {
           '/login': (context) => const LoginPage(),
           '/register': (context) => RegisterPage(),
-          '/dashboard': (context) =>   const TabBarMenu( userData: null,),
         },
         initialRoute: '/',
         theme: ThemeData(
