@@ -88,7 +88,9 @@ class _TabBarMenuState extends State<TabBarMenu> {
                   title: const Text('P R O F I L E'),
                   onTap: () {
                     // Add your navigation logic here
-                    Navigator.pop(context); // Close the drawer
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/profile');
+                   // Close the drawer
                   },
                 ),
                 ListTile(
