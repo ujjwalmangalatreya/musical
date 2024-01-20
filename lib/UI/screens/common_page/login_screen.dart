@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
             }else if (state is SignInFailed) {
               return const LoginPage();
             }else if(state is SignInSuccessful){
-              return const TabBarMenu( userData: null,);
+              return  TabBarMenu( userData: state.userData,);
             }
             return SafeArea(
               child: SingleChildScrollView(

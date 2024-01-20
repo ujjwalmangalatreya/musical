@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:musical_mingle/UI/screens/musician_screens/musician_list_screen.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});

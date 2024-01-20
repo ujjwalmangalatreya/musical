@@ -76,7 +76,8 @@ class _TabBarMenuState extends State<TabBarMenu> {
                       const SizedBox(height: 10),
                       // Adjust the spacing as needed
                       Text(
-                        '${widget.userData?.displayName}',
+                       '${widget.userData?.displayName == '' ? '' : widget.userData?.displayName}',
+
                         style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
