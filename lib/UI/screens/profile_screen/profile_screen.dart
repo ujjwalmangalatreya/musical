@@ -16,8 +16,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User Profile'),
+        title: const Text('Profile'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: () {
+              // Implement the logic to navigate to the Edit Profile screen
+              Navigator.pushNamed(context, '/editProfile');
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child:  Column(

@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
           '/register': (context) => RegisterPage(),
           '/dashboard': (context) =>   const TabBarMenu( userData: null,),
           '/profile': (context) => const ProfileScreen(),
+          '/editProfile': (context) => const EditProfileScreen(),
         },
         initialRoute: '/',
         theme: ThemeData(
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         //TOdo: Need to return splash scrren after profile page is completed.
-        home: const EditProfileScreen(),
+        home: const SplashScreen(),
       ),
     );
   }
