@@ -32,7 +32,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       height: 180,
-                      width: 180,
+                      width: 160,
                       child:  Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -57,7 +57,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       height: 180,
-                      width: 180,
+                      width: 160,
                       child:  Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

@@ -41,7 +41,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             emit(const SignInFailed(failedErrorMessage: 'User Not Found..'));
           } else if (e.code == 'wrong-password') {
             emit(const SignInFailed(failedErrorMessage: 'Wrong Password.. '));
-          } else {
+          }else if (e.code == 'invalid-credential') {
+            emit(const SignInFailed(failedErrorMessage: 'Invalid- Credentials'));
+          }
+          else {
             emit(const SignInFailed(
                 failedErrorMessage: 'Something Went Wrong.. '));
           }

@@ -2,7 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musical_mingle/UI/screens/common_page/login_screen.dart';
-import 'package:musical_mingle/UI/screens/common_page/profile_screen.dart';
+import 'package:musical_mingle/UI/screens/profile_screen/edit_profile_screen.dart';
+import 'package:musical_mingle/UI/screens/profile_screen/profile_screen.dart';
 import 'package:musical_mingle/UI/screens/common_page/register_screen.dart';
 import 'package:musical_mingle/UI/screens/common_page/splash_screen.dart';
 import 'package:musical_mingle/UI/screens/common_page/tab_bar.dart';
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         //TOdo: Need to return splash scrren after profile page is completed.
-        home: const SplashScreen(),
+        home: const EditProfileScreen(),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:musical_mingle/UI/screens/common_page/error_page.dart';
 import 'package:musical_mingle/UI/screens/common_page/tab_bar.dart';
 import 'package:musical_mingle/UI/screens/common_widgets/loader_widget.dart';
 
@@ -35,20 +36,13 @@ class _LoginPageState extends State<LoginPage> {
               ),
             );
           }
-          if (state is SignInFailed) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('User Login Failed'),
-              ),
-            );
-          }
         },
         child: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
             if (state is  SignInProgress) {
               return const Loader();
             }else if (state is SignInFailed) {
-              return const LoginPage();
+              return const ErrorPage();
             }else if(state is SignInSuccessful){
               return  TabBarMenu( userData: state.userData,);
             }
