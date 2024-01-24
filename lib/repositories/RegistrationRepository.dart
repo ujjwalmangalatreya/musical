@@ -12,6 +12,9 @@ class RegistrationRepository {
           .createUserWithEmailAndPassword(email: email, password: password);
 
       // Add user details to Firebase Firestore
+      // TODO: Do we actually need this user model as we have user profile and all the data are in it.
+      // TODO: we are not using any of the data from user model
+      // TODO : lets keep it for now, later if its not of use we can remove it
       final userModel = UserModel(
         isNewUser: true,
         email: userCredential.user?.email ?? '',

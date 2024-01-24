@@ -61,4 +61,9 @@ class UserDetailsRepositories {
       rethrow;
     }
   }
+
+  Future<UserProfile> updateUserProfile async {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+
+  }
 }
