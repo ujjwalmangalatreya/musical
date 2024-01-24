@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../models/user_model.dart';
+import '../models/user_profile_model.dart';
 
 class UserDetailsRepositories {
   // Function to get all user data
@@ -28,6 +30,34 @@ class UserDetailsRepositories {
         );
       }
     } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<UserProfile> addUserProfile() async {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+
+    try {
+      final userProfile = UserProfile(
+        userId: '',
+        fullName: "",
+        location: "",
+        musicalDetails: MusicalDetails(
+            instruments: [], genres: [], influences: [], skillLevel: ''),
+        bio: "",
+        portfolio: Portfolio(soundcloudLink: '', musicSamples: []),
+        availabilityPreferences: AvailabilityPreferences(
+            rehearsals: false, gigs: false, preferences: ''),
+        connectionsCollaborations:
+        ConnectionsCollaborations(currentBands: [], collaborations: []),
+        socialMediaLinks: SocialMediaLinks(linkedin: '', instagram: ''),
+      );
+      await FirebaseFirestore.instance
+          .collection('userProfiles')
+          .doc(userId)
+          .set(userProfile.toJson());
+      return userProfile;
+    }catch(e){
       rethrow;
     }
   }
