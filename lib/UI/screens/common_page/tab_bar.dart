@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musical_mingle/UI/screens/musician_screens/learn_screen.dart';
 import 'package:musical_mingle/UI/screens/musician_screens/musician_list_screen.dart';
 import 'package:musical_mingle/blocs/auth/auth_bloc.dart';
+import 'package:musical_mingle/blocs/profile/profile_bloc.dart';
 import 'package:musical_mingle/models/user_model.dart';
 import '../musician_screens/dashboard_screen.dart';
 
@@ -90,8 +91,10 @@ class _TabBarMenuState extends State<TabBarMenu> {
                   onTap: () {
                     // Add your navigation logic here
                     Navigator.pop(context);
+                  //  context.read<ProfileBloc>().add(GetProfile());
                     Navigator.pushNamed(context, '/profile');
                    // Close the drawer
+
                   },
                 ),
                 ListTile(

@@ -62,8 +62,46 @@ class UserDetailsRepositories {
     }
   }
 
-  Future<UserProfile> updateUserProfile async {
+  Future<UserProfile> getUserProfile() async {
     final userId = FirebaseAuth.instance.currentUser?.uid;
+    try {
+      final documentSnapshot = await FirebaseFirestore.instance
+          .collection("userProfiles")
+          .doc(userId)
+          .get();
 
+      if (documentSnapshot.exists) {
+        // If the document exists, extract the data
+        final userProfileData = documentSnapshot.data() as Map<String, dynamic>;
+
+        // Map the data to the UserProfile model
+        final userProfile = UserProfile(
+          userId: userProfileData['userId'],
+          fullName: userProfileData['fullName'],
+          location: userProfileData['location'],
+          musicalDetails: MusicalDetails.fromJson(userProfileData['musicalDetails']),
+          bio: userProfileData['bio'],
+          portfolio: Portfolio.fromJson(userProfileData['portfolio']),
+          availabilityPreferences: AvailabilityPreferences.fromJson(userProfileData['availabilityPreferences']),
+          connectionsCollaborations: ConnectionsCollaborations.fromJson(userProfileData['connectionsCollaborations']),
+          socialMediaLinks: SocialMediaLinks.fromJson(userProfileData['socialMediaLinks']),
+        );
+
+        return userProfile;
+      } else {
+        // Handle the case where the document does not exist
+        throw Exception("UserProfile not found for user with ID: $userId");
+      }
+    } catch (e) {
+      // Handle any exceptions that may occur
+      rethrow;
+    }
   }
+
+
+
+// Future<UserProfile> updateUserProfile async {
+  //   final userId = FirebaseAuth.instance.currentUser?.uid;
+  //
+  // }
 }

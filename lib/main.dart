@@ -7,6 +7,7 @@ import 'package:musical_mingle/UI/screens/profile_screen/profile_screen.dart';
 import 'package:musical_mingle/UI/screens/common_page/register_screen.dart';
 import 'package:musical_mingle/UI/screens/common_page/splash_screen.dart';
 import 'package:musical_mingle/UI/screens/common_page/tab_bar.dart';
+import 'package:musical_mingle/blocs/profile/profile_bloc.dart';
 import 'blocs/auth/auth_bloc.dart';
 import 'blocs/registration/registration_bloc.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       providers:[
         BlocProvider<RegistrationBloc>(create: (context) => RegistrationBloc()),
         BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
+        BlocProvider<ProfileBloc>(create: (context) => ProfileBloc())
       ],
 
       child: MaterialApp(

@@ -21,6 +21,20 @@ class UserProfile {
     required this.socialMediaLinks,
   });
 
+  factory UserProfile.fromJson(Map<String, dynamic> json) {
+    return UserProfile(
+      userId: json['userId'],
+      fullName: json['fullName'],
+      location: json['location'],
+      musicalDetails: MusicalDetails.fromJson(json['musicalDetails']),
+      bio: json['bio'],
+      portfolio: Portfolio.fromJson(json['portfolio']),
+      availabilityPreferences: AvailabilityPreferences.fromJson(json['availabilityPreferences']),
+      connectionsCollaborations: ConnectionsCollaborations.fromJson(json['connectionsCollaborations']),
+      socialMediaLinks: SocialMediaLinks.fromJson(json['socialMediaLinks']),
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'userId': userId,
@@ -49,6 +63,15 @@ class MusicalDetails {
     required this.skillLevel,
   });
 
+  factory MusicalDetails.fromJson(Map<String, dynamic> json) {
+    return MusicalDetails(
+      instruments: List<String>.from(json['instruments']),
+      genres: List<String>.from(json['genres']),
+      influences: List<String>.from(json['influences']),
+      skillLevel: json['skillLevel'],
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'instruments': instruments,
@@ -67,6 +90,13 @@ class Portfolio {
     required this.soundcloudLink,
     required this.musicSamples,
   });
+
+  factory Portfolio.fromJson(Map<String, dynamic> json) {
+    return Portfolio(
+      soundcloudLink: json['soundcloudLink'],
+      musicSamples: List<String>.from(json['musicSamples']),
+    );
+  }
 
   Map<String, dynamic> toJson() {
     return {
@@ -87,6 +117,14 @@ class AvailabilityPreferences {
     required this.preferences,
   });
 
+  factory AvailabilityPreferences.fromJson(Map<String, dynamic> json) {
+    return AvailabilityPreferences(
+      rehearsals: json['rehearsals'],
+      gigs: json['gigs'],
+      preferences: json['preferences'],
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'rehearsals': rehearsals,
@@ -105,6 +143,13 @@ class ConnectionsCollaborations {
     required this.collaborations,
   });
 
+  factory ConnectionsCollaborations.fromJson(Map<String, dynamic> json) {
+    return ConnectionsCollaborations(
+      currentBands: List<String>.from(json['currentBands']),
+      collaborations: List<String>.from(json['collaborations']),
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'currentBands': currentBands,
@@ -121,6 +166,13 @@ class SocialMediaLinks {
     required this.linkedin,
     required this.instagram,
   });
+
+  factory SocialMediaLinks.fromJson(Map<String, dynamic> json) {
+    return SocialMediaLinks(
+      linkedin: json['linkedin'],
+      instagram: json['instagram'],
+    );
+  }
 
   Map<String, dynamic> toJson() {
     return {
