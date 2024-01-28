@@ -7,7 +7,6 @@ class AuthRepository {
     try {
       final credentials = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-
       return credentials;
     } catch (e) {
       rethrow;

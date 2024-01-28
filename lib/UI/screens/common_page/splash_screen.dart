@@ -27,9 +27,14 @@ class SplashScreen extends StatelessWidget {
             ),
           );
         } else {
-          return const Scaffold(
-            body: Center(
-              child: Text("Splash Screen"), // TODO : Need to create a splash screen
+          return  Scaffold(
+            body: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/Splash.jpeg'), // Replace with the actual filename
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           );
         }

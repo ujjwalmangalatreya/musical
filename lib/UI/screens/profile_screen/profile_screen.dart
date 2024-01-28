@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musical_mingle/UI/screens/common_page/error_page.dart';
 import 'package:musical_mingle/UI/screens/common_widgets/loader_widget.dart';
-
 import '../../../blocs/profile/profile_bloc.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -130,8 +129,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             }else {
               return const ErrorPage();
             }
-             // return const Center(child: Text("Something went wring"),);
-
           },
         ),
       ),
@@ -150,7 +147,7 @@ class SectionTitle extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Text(
         title,
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
       ),
     );
   }
