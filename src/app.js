@@ -1,21 +1,16 @@
 //Import required modules
 const express = require('express');
 const db = require('./db');
+const bodyParser = require('body-parser')
+const registerRoute = require('./routes/register.js')
+
 
 //Create an express application
 const app = express();
 
-// Define route handler for the root path
-app.get('/', (req, res) => {
-    // res.send('Hello World.');
-    db.query('SELECT * FROM users where id =1')
-        .then(result => {
-            res.send(result.rows);
-        })
-        .catch(err => {
-            res.send("Error: " + err);
-        });
-});
+app.use(bodyParser.json())
+
+app.use('/api/v1/register',registerRoute)
 
 const PORT = process.env.PORT || 3000;
 
