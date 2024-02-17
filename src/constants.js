@@ -1,6 +1,6 @@
 const constants = {
-    DB_NAME: "Musical",
+    DB_NAME: "postgres",
     PORT: "5432",
 }
 
-export {constants}
+export { constants }

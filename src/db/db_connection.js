@@ -16,9 +16,9 @@ const pool = new Pool({
 const connectDB = async () => {
     try {
         await pool.connect();
-        console.log(`Database Connected Sucessfully in Port ${process.env.PORT}`)
+        console.log(`:::::Database Connected Sucessfully in Port ${process.env.PORT}:::::`)
     } catch (err) {
-        console.log("Database connection FAILED ::", err);
+        console.log(":::::Database connection FAILED:::::", err);
         throw err;
     }
 }
