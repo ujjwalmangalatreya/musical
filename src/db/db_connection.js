@@ -1,8 +1,9 @@
 
-import pg from "pg";
-import { constants } from "../constants.js";
 
-const {Pool} = pg;
+const { Pool }  = require("pg")
+const { constants } = require("../constants.js")
+
+
 
 
 const pool = new Pool({
@@ -10,13 +11,13 @@ const pool = new Pool({
     password: 'ujjwal',
     host: 'localhost',
     database: constants.DB_NAME,
-    port: process.env.PORT,
+    port: process.env.DB_PORT,
 })
 
-const connectDB = async () => {
+const connectDB = async options => {
     try {
-        await pool.connect();
-        console.log(`:::::Database Connected Sucessfully in Port ${process.env.PORT}:::::`)
+        await pool.connect(options);
+        console.log(`:::::Database Connected Successfully in Port ${process.env.DB_PORT}:::::`)
     } catch (err) {
         console.log(":::::Database connection FAILED:::::", err);
         throw err;
@@ -24,4 +25,4 @@ const connectDB = async () => {
 }
 
 
-export { connectDB }
+module.exports = { connectDB }

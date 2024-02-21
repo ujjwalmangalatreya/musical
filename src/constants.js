@@ -3,4 +3,4 @@ const constants = {
     PORT: "5432",
 }
 
-export { constants }
+module.exports =  { constants }

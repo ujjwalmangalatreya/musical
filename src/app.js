@@ -1,6 +1,7 @@
-import express from 'express'
-import cors from 'cors'
-import cookieParser from 'cookie-parser';
+
+const express = require("express")
+const cors = require("cors")
+const cookieParser = require("cookie-parser")
 
 //Create an express application
 const app = express();
@@ -16,6 +17,6 @@ app.use(cookieParser())
 
 const PORT = process.env.PORT || 3000;
 
-export { app }
+module.exports = { app }
 
 
