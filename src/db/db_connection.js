@@ -3,12 +3,9 @@
 const { Pool }  = require("pg")
 const { constants } = require("../constants.js")
 
-
-
-
 const pool = new Pool({
     user: '',
-    password: 'ujjwal',
+    password: 'mysecretpassword',
     host: 'localhost',
     database: constants.DB_NAME,
     port: process.env.DB_PORT,
