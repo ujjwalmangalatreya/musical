@@ -1,25 +1,17 @@
+const {Sequelize} = require("sequelize")
 
+const sequelize = new Sequelize("musical","","atreya",{
+    host : "localhost",
+    dialect : "postgres"
+});
 
-const { Pool }  = require("pg")
-const { constants } = require("../constants.js")
-
-const pool = new Pool({
-    user: '',
-    password: 'mysecretpassword',
-    host: 'localhost',
-    database: constants.DB_NAME,
-    port: process.env.DB_PORT,
-})
-
-const connectDB = async options => {
-    try {
-        await pool.connect(options);
-        console.log(`:::::Database Connected Successfully in Port ${process.env.DB_PORT}:::::`)
-    } catch (err) {
-        console.log(":::::Database connection FAILED:::::", err);
-        throw err;
+const dbConnect = async ()=>{
+    try{
+        await sequelize.authenticate()
+        console.log("Connection has been established successfully");
+    }catch (err){
+        console.log("Unable to connect to the database",err);
     }
 }
 
-
-module.exports = { connectDB }
+module.exports ={dbConnect, sequelize }
