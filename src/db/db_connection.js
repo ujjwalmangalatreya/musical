@@ -7,8 +7,9 @@ const sequelize = new Sequelize("musical","","atreya",{
 
 const dbConnect = async ()=>{
     try{
-        await sequelize.authenticate()
+        await sequelize.authenticate();
         console.log("Connection has been established successfully");
+        await sequelize.sync();
     }catch (err){
         console.log("Unable to connect to the database",err);
     }
