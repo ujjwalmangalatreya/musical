@@ -5,6 +5,8 @@ module.exports = {
   add: async (req, res) => {
     try {
       const user = await Users.create({
+        //validateUserName()
+        //validatePasswor()
         username: req.body.username,
         password: req.body.password
       });
