@@ -2,7 +2,7 @@
   "development": {
     "username": null,
     "password": "atreya",
-    "database": "postgres",
+    "database": "musical",
     "host": "localhost",
     "dialect": "postgres"
   },
