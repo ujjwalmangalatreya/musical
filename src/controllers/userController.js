@@ -23,7 +23,8 @@ module.exports = {
           password: req.body.password
         });
         // Send status code and json response
-        res.status(201).send(new ApiResponse(201,[],
+        res.status(201).send(new ApiResponse(201,[
+          {username : req.body.username}],
           "Username Password registered successfully",));
       }
     } catch (error) {
