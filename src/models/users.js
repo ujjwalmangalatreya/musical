@@ -1,5 +1,8 @@
 'use strict';
+const bcrypt = require("bcrypt")
 const { Model,DataTypes } = require('sequelize');
+
+
 module.exports = (sequelize) => {
   class Users extends Model {
     /**
@@ -12,11 +15,34 @@ module.exports = (sequelize) => {
     }
   }
   Users.init({
-    username: DataTypes.STRING,
-    password: DataTypes.STRING
-  }, {
+    id:{
+      type:DataTypes.UUID,
+      unique : true,
+      allowNull : false,
+      autoIncrement : true,
+      primaryKey:true
+    },
+    username: {
+      type : DataTypes.STRING,
+      allowNull : false
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull : false
+    }
+  },
+    {
     sequelize,
     modelName: 'Users',
   });
+ Users.beforeSave((user,options)=>{
+   if(user.changed("password")){
+     const salt = bcrypt.genSaltSync(10);
+     user.password = bcrypt.hashSync(user.password,salt);
+   }
+ });
+
+
   return Users;
+
 };
