@@ -1,27 +1,9 @@
-const { continueSession } = require("pg/lib/crypto/sasl");
 
-
-const validateUserName = (username)=>{
-     const userNameLength = username.length;
-     if(userNameLength < 7 ){
-       return false
-     }
-    // if(userNameLength >=7) {
-    //   return true
-    // }
+const checkUserNameEmpty = (username)=>{
+  return !(username === "" || username === null);
+}
+const  checkPasswordEmpty =(password)=>{
+  return !(password === "" || password === null);
 }
 
-const  validatePassword =(password)=>{
-  //   const passwordLength = password.length
-  // if(passwordLength < 7){
-  //   return false
-  // }
-  // if(passwordLength >=7){
-  //   return true
-  // }
-  // if(passwordLength > 15){
-  //   return false
-  // }
-}
-
-module.exports = {validatePassword,validateUserName}
+module.exports = {checkUserNameEmpty,checkPasswordEmpty}

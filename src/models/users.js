@@ -34,8 +34,5 @@ module.exports = (sequelize) => {
      user.password = bcrypt.hashSync(user.password,salt);
    }
  });
-
-
   return Users;
-
 };
