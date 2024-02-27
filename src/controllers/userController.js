@@ -1,30 +1,38 @@
 const {sequelize} = require("../db/db_connection.js")
 const { checkUserNameEmpty, checkPasswordEmpty } = require("../services/user.service");
+const { ApiResponse } = require("../utils/ApiResponse");
+const { ApiError } = require("../utils/ApiError");
 const Users = require("../models/users.js")(sequelize)
 
 module.exports = {
   add: async (req, res) => {
     try {
-      const usernameValue = checkUserNameEmpty(req.body.username)
-      const passwordValue = checkUserNameEmpty(req.body.password)
+      //Check if username and password empty and null
       if(!checkUserNameEmpty(req.body.username) ||
         !checkPasswordEmpty(req.body.password)){
-            return res.status(400).send({
-              success :"0",
-              message :"Enter username and password"
-            });
+            return res.status(400).send(new ApiError(
+              400,
+              "Username and Password should not be empty",
+            ));
       }else {
+        // add username and password to database Users table
         const user = await Users.create({
-
-          //validateUserName()
-          //validatePasswor()
+          //validateUserName
+          //validatePassword
           username: req.body.username,
           password: req.body.password
         });
-        res.status(201).send(user.toJSON());
+        // Send status code and json response
+        res.status(201).send(new ApiResponse(201,[],
+          "Username Password registered successfully",));
       }
     } catch (error) {
-      res.status(400).send(error.toString());
+      // send if error message
+      res.status(500).send(new ApiError(
+        500,
+        "Internal Server Error",
+        ""+error.toString()
+      ));
     }
   }
 };
