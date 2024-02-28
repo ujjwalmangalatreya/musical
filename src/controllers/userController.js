@@ -16,9 +16,12 @@ module.exports = {
             ));
       }else {
         // add username and password to database Users table
+        //validateUserName
+        //validatePassword
+       
+
+
         const user = await Users.create({
-          //validateUserName
-          //validatePassword
           username: req.body.username,
           password: req.body.password
         });
@@ -36,4 +39,8 @@ module.exports = {
       ));
     }
   }
+
+  
+  
+  
 };
