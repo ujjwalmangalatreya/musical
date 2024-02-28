@@ -9,9 +9,25 @@ const  checkPasswordEmpty =(password)=>{
 
 
 const checkPasswordValidations = (password) => { 
-  // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  // console.log(passwordRegex.test(password));
-  // return !passwordRegex.test(password);
+  if (password.length < 7 || password.length > 15) {
+    return false;
+  }
+
+  
+  const hasLowercase = /[a-z]/.test(password);
+  const hasUppercase = /[A-Z]/.test(password);
+  const hasNumber = /[0-9]/.test(password);
+  if (!hasLowercase || !hasUppercase || !hasNumber) {
+    return false;
+  }
+
+  const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
+  if (!hasSpecialChar) {
+    return false;
+  }
+
+  return true;
+  
 }
 
 module.exports = {checkUserNameEmpty,checkPasswordEmpty,checkPasswordValidations}

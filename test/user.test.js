@@ -24,23 +24,23 @@ describe('::TEST USER SERVICES:::', () => {
 
 describe("::TEST USER BUSINESS LOGIC::", () => {
   it("Test to verify password should be atleaset 7 char", () => {
-    const password = checkPasswordValidations("hellone");
+    const password = checkPasswordValidations("kTest1!j");
     expect(password).toBe(true);
   });
   it("Test to verify password should not be greater than 15 char", () => {
-    const password = checkPasswordValidations("eksngbe1hd@gGd");
+    const password = checkPasswordValidations("dEeksnGbe1hd@g");
     expect(password).toBe(true);
   });
   it("Test to verify password should atleast contain a alphabet", () => {
-    const password = checkPasswordValidations("123a32ad");
+    const password = checkPasswordValidations("Uhdsje1!");
     expect(password).toBe(true);
   });
   it("Test to verify password should atleast contain a capital letter", () => {
-    const password = checkPasswordValidations("123A32WS");
+    const password = checkPasswordValidations("Ujjwalatrey@1");
     expect(password).toBe(true);
   });
   it("Test to verify password should stleat containt a special char", () => {
-    const password = checkPasswordValidations("123A32@#");
+    const password = checkPasswordValidations("Ujjw#lAtrey1a");
     expect(password).toBe(true);
   })
 })
