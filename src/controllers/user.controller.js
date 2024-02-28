@@ -1,8 +1,8 @@
 const {sequelize} = require("../db/db_connection.js")
-const { checkUserNameEmpty, checkPasswordEmpty } = require("../services/user.service");
-const { ApiResponse } = require("../utils/ApiResponse");
-const { ApiError } = require("../utils/ApiError");
-const Users = require("../models/users.js")(sequelize)
+const { checkUserNameEmpty, checkPasswordEmpty } = require("../services/user.service.js");
+const { ApiResponse } = require("../utils/ApiResponse.js");
+const { ApiError } = require("../utils/ApiError.js");
+const Users = require("../models/users.models.js")(sequelize)
 
 module.exports = {
   add: async (req, res) => {
@@ -18,9 +18,6 @@ module.exports = {
         // add username and password to database Users table
         //validateUserName
         //validatePassword
-       
-
-
         const user = await Users.create({
           username: req.body.username,
           password: req.body.password
