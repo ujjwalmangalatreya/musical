@@ -38,7 +38,7 @@ module.exports = {
             .send(
               new ApiResponse(
                 201,
-                [{ username: req.body.username , id: Sequelize.id}],
+                [{ username: req.body.username, id: Sequelize.id }],
                 "Username Password registered successfully"
               )
             );
