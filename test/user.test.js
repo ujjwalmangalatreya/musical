@@ -42,5 +42,5 @@ describe("::TEST USER BUSINESS LOGIC::", () => {
   it("Test to verify password should stleat containt a special char", () => {
     const password = checkPasswordValidations("Ujjw#lAtrey1a");
     expect(password).toBe(true);
-  })
+  });
 })
