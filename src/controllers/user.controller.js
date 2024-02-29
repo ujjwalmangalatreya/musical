@@ -6,6 +6,7 @@ const {
 } = require("../services/user.service.js");
 const { ApiResponse } = require("../utils/ApiResponse.js");
 const { ApiError } = require("../utils/ApiError.js");
+const { Sequelize } = require("sequelize");
 const Users = require("../models/users.models.js")(sequelize);
 
 module.exports = {
@@ -37,7 +38,7 @@ module.exports = {
             .send(
               new ApiResponse(
                 201,
-                [{ username: req.body.username }],
+                [{ username: req.body.username , id: Sequelize.id}],
                 "Username Password registered successfully"
               )
             );
