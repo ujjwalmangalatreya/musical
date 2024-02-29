@@ -1,6 +1,9 @@
 
 const {describe,expect,test} = require("@jest/globals")
-const { checkUserNameEmpty, checkPasswordEmpty,checkPasswordValidations} = require("../src/services/user.service.js");
+const { checkUserNameEmpty,
+  checkUserNameValidation,
+  checkPasswordEmpty,
+  checkPasswordValidations } = require("../src/services/user.service.js");
 
 describe('::TEST USER SERVICES:::', () => {
   test('Check if username is empty', async () => {
@@ -42,5 +45,9 @@ describe("::TEST USER BUSINESS LOGIC::", () => {
   it("Test to verify password should stleat containt a special char", () => {
     const password = checkPasswordValidations("Ujjw#lAtrey1a");
     expect(password).toBe(true);
+  });
+  it("Test to verify username should be atleast 3 char long", () => {
+    const username = checkUserNameValidation("abcs");
+    expect(username).toBe(true);
   });
 })

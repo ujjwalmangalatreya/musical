@@ -5,6 +5,12 @@ const checkUserNameEmpty = (username)=>{
 const  checkPasswordEmpty =(password)=>{
   return !(password === "" || password === null);
 }
+const checkUserNameValidation = (username) => { 
+  if(username.length < 3){
+    return false;
+  }
+  return true;
+}
 
 const checkPasswordValidations = (password) => { 
   if (password.length < 7 || password.length > 15) {
@@ -24,4 +30,9 @@ const checkPasswordValidations = (password) => {
   
 }
 
-module.exports = {checkUserNameEmpty,checkPasswordEmpty,checkPasswordValidations}
+module.exports = {
+  checkUserNameEmpty,
+  checkPasswordEmpty,
+  checkUserNameValidation,
+  checkPasswordValidations
+}

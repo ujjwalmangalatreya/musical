@@ -21,6 +21,7 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
     },
     username: {
+      unique : true,
       type : DataTypes.STRING,
       allowNull : false
     },
