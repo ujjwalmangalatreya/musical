@@ -9,6 +9,9 @@ const { ApiResponse } = require("../utils/ApiResponse.js");
 const { ApiError } = require("../utils/ApiError.js");
 const { Sequelize } = require("sequelize");
 const Users = require("../models/users.models.js")(sequelize);
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken")
+
 
 module.exports = {
   registerUser: async (req, res) => {
@@ -28,21 +31,21 @@ module.exports = {
             password: req.body.password,
           });
           res.status(201).send(new ApiResponse(
-                201,
-                [{ username: req.body.username, id: Sequelize.id }],
-                "Username Password registered successfully"
-              )
-            );
+            201,
+            [{ username: req.body.username, id: Sequelize.id }],
+            "Username Password registered successfully"
+          )
+          );
         } else {
           res.status(400).send(
             new ApiError(400, "Username Password cannot be validated", [
               {
-                UserNameLength : "Username length must be atleast 3 and not greater than 15 char",
-                PasswordLength:"Password length must be atleast 7 and not greater than 15 char",
-                PasswordUpperCase:"Password must have atleast one uppercase character",
-                PasswordLowerCase:"Password must have atleast one lowercase character",
+                UserNameLength: "Username length must be atleast 3 and not greater than 15 char",
+                PasswordLength: "Password length must be atleast 7 and not greater than 15 char",
+                PasswordUpperCase: "Password must have atleast one uppercase character",
+                PasswordLowerCase: "Password must have atleast one lowercase character",
                 PasswordNumber: "Password must have atleast one number",
-                PasswordSpecialChar:"Password must have atleast one special character",
+                PasswordSpecialChar: "Password must have atleast one special character",
               },
             ])
           );
@@ -61,14 +64,27 @@ module.exports = {
   loginUser: async (req, res) => {
     const { username, password } = req.body;
 
-    try { 
+    try {
       const user = await Users.findOne({
         where: { username: username },
       });
-      if (!user) { 
+      if (!user) {
         res.status(400).send(new ApiError(400, "Username did not match.."));
       }
-    }catch(error){
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!isPasswordValid) {
+        res.status(400).send(new ApiError(400, "Password did not match.."));
+      }
+      const token = jwt.sign({ id: user.id }, "nodeauthsecret", {
+        expiresIn: "1h",
+      });
+      res.status(200).send(new ApiResponse(200, [
+        {
+          id: user.id,
+          username: user.username,
+          token: token
+        }], "Login Successful"));
+    } catch (error) {
       res.status(500).send(new ApiError(500, "Internal Server Error", "" + error.toString())
       );
     }
