@@ -36,7 +36,15 @@ describe("::LOGIN TEST::", () => {
           await loginUser(req, res);
 
           expect(res.status).toHaveBeenCalledWith(200);
-          expect(res.send).toHaveBeenCalledWith(expect.objectContaining({ token: 'mockToken' }));
+         
+          expect(res.send).toHaveBeenCalledWith(expect.objectContaining({
+               data: expect.arrayContaining([
+                    expect.objectContaining({ token: 'mockToken' })
+               ]),
+               message: 'Login Successful',
+               statusCode: 200,
+               success: true
+          }));
      });
 
      it("Should return 400 when user enters invalid username and password", async () => {
@@ -47,6 +55,11 @@ describe("::LOGIN TEST::", () => {
           await loginUser(req, res);
 
           expect(res.status).toHaveBeenCalledWith(400);
-          expect(res.send).toHaveBeenCalledWith({ error: 'Invalid username or password' });
+          expect(res.send).toHaveBeenCalledWith(expect.objectContaining({
+               message: 'Username did not match..',
+               statusCode: 400,
+               success: false
+          }));
+         // expect(res.send).toHaveBeenCalledWith({ error: 'Invalid username or password' });
      });
 });
