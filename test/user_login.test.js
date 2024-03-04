@@ -1,25 +1,20 @@
-const { sequelize } = require("../src/db/db_connection.js")
-const { loginUser } = require("../src/controllers/user.controller.js")
-const jwt = require("jsonwebtoken")
-const bcrypt = require("bcrypt")
-const { describe, beforeEach } = require("@jest/globals")
-const Users = require("../src/models/users.models.js")
+const { loginUser } = require("../src/controllers/user.controller.js");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const { describe, beforeEach, it, expect } = require("@jest/globals");
+const Users = require("../src/models/users.models.js");
 
-// const { sequelize } = require("../src/db/db_connection.js")
-// const Users = require("../src/models/users.models.js")(sequelize)
+// Mock user model
+jest.mock("../src/models/users.models.js", () => ({
+     findOne: jest.fn()
+}));
 
-//Mock usermode
-jest.mock("../src/models/users.models.js", () => {
-     Users: {
-          findOne: jest.fn()
-     }
-})
-//mock bcrypt
+// Mock bcrypt
 jest.mock('bcrypt', () => ({
      compare: jest.fn(),
 }));
 
-// mock jwt
+// Mock jwt
 jest.mock('jsonwebtoken', () => ({
      sign: jest.fn(),
 }));
@@ -27,9 +22,10 @@ jest.mock('jsonwebtoken', () => ({
 describe("::LOGIN TEST::", () => {
      beforeEach(() => {
           jest.clearAllMocks();
-     })
-     it("Should return 200 when user enters valid username passwrod", async () => {
-          const mockUser = { id: 1, username: "XXXX", password: "XXXX" }
+     });
+
+     it("Should return 200 when user enters valid username and password", async () => {
+          const mockUser = { id: 1, username: "XXXX", password: "XXXX" };
           Users.findOne.mockResolvedValue(mockUser);
           bcrypt.compare.mockResolvedValue(true);
           jwt.sign.mockReturnValue('mockToken');
@@ -41,9 +37,16 @@ describe("::LOGIN TEST::", () => {
 
           expect(res.status).toHaveBeenCalledWith(200);
           expect(res.send).toHaveBeenCalledWith(expect.objectContaining({ token: 'mockToken' }));
-
      });
-     it("Should retutn 400 when user enters invalid username password", () => {
 
-     })
-})
+     it("Should return 400 when user enters invalid username and password", async () => {
+          Users.findOne.mockResolvedValue(null);
+          const req = { body: { username: 'invaliduser', password: 'invalidpassword' } };
+          const res = { status: jest.fn().mockReturnThis(), send: jest.fn() };
+
+          await loginUser(req, res);
+
+          expect(res.status).toHaveBeenCalledWith(400);
+          expect(res.send).toHaveBeenCalledWith({ error: 'Invalid username or password' });
+     });
+});
