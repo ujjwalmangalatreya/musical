@@ -1,4 +1,5 @@
-const { sequelize } = require("../db/db_connection.js");
+const { Sequelize } = require("sequelize");
+//const { sequelize } = require("../db/db_connection.js");
 const {
   checkUserNameEmpty,
   checkPasswordEmpty,
@@ -7,8 +8,8 @@ const {
 } = require("../services/user.service.js");
 const { ApiResponse } = require("../utils/ApiResponse.js");
 const { ApiError } = require("../utils/ApiError.js");
-const { Sequelize } = require("sequelize");
-const Users = require("../models/users.models.js")(sequelize);
+
+const Users = require("../models/users.models.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken")
 
@@ -88,5 +89,6 @@ module.exports = {
       res.status(500).send(new ApiError(500, "Internal Server Error", "" + error.toString())
       );
     }
+
   }
 };
