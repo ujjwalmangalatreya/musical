@@ -31,14 +31,14 @@ module.exports = {
             username: req.body.username,
             password: req.body.password,
           });
-          res.status(201).send(new ApiResponse(
+          return res.status(201).send(new ApiResponse(
             201,
             [{ username: req.body.username, id: Sequelize.id }],
             "Username Password registered successfully"
           )
           );
         } else {
-          res.status(400).send(
+         return res.status(400).send(
             new ApiError(400, "Username Password cannot be validated", [
               {
                 UserNameLength: "Username length must be atleast 3 and not greater than 15 char",
@@ -50,7 +50,6 @@ module.exports = {
               },
             ])
           );
-          return;
         }
       }
     } catch (error) {
