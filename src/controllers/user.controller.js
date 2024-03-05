@@ -1,5 +1,5 @@
 const { Sequelize } = require("sequelize");
-//const { sequelize } = require("../db/db_connection.js");
+const { sequelize } = require("../db/db_connection.js");
 const {
   checkUserNameEmpty,
   checkPasswordEmpty,
@@ -9,7 +9,7 @@ const {
 const { ApiResponse } = require("../utils/ApiResponse.js");
 const { ApiError } = require("../utils/ApiError.js");
 
-const Users = require("../models/users.models.js");
+const Users = require("../models/users.models.js")(sequelize);
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken")
 
@@ -70,25 +70,24 @@ module.exports = {
         where: { username: username },
       });
       if (!user) {
-        res.status(400).send(new ApiError(400, "Username did not match.."));
+       return res.status(400).send(new ApiError(400, "Username did not match.."));
       }
       const isPasswordValid = await bcrypt.compare(password, user.password);
       if (!isPasswordValid) {
-        res.status(400).send(new ApiError(400, "Password did not match.."));
+        return res.status(400).send(new ApiError(400, "Password did not match.."));
       }
-      const token = jwt.sign({ id: user.id }, "nodeauthsecret", {
+      const token = jwt.sign({ username: user.username }, "nodeauthsecret", {
         expiresIn: "1h",
       });
-      res.status(200).send(new ApiResponse(200, [
+     return res.status(200).send(new ApiResponse(200, [
         {
           id: user.id,
           username: user.username,
           token: token
         }], "Login Successful"));
     } catch (error) {
-      res.status(500).send(new ApiError(500, "Internal Server Error", "" + error.toString())
+      return res.status(500).send(new ApiError(500, "Internal Server Error", "" + error.toString())
       );
     }
-
   }
 };
