@@ -1,6 +1,6 @@
 'use strict';
 const bcrypt = require("bcrypt")
-const { Model,DataTypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 
 
 module.exports = (sequelize) => {
@@ -12,6 +12,7 @@ module.exports = (sequelize) => {
      */
     static associate(models) {
       // define association here
+      Users.hasOne(models.Profile, { foreignKey: 'userId', onDelete: 'CASCADE' })
     }
   }
   Users.init({
@@ -21,24 +22,24 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
     },
     username: {
-      unique : true,
-      type : DataTypes.STRING,
-      allowNull : false
+      unique: true,
+      type: DataTypes.STRING,
+      allowNull: false
     },
     password: {
       type: DataTypes.STRING,
-      allowNull : false
+      allowNull: false
     }
   },
     {
-    sequelize,
-    modelName: 'Users',
+      sequelize,
+      modelName: 'Users',
+    });
+  Users.beforeSave((user, options) => {
+    if (user.changed("password")) {
+      const salt = bcrypt.genSaltSync(10);
+      user.password = bcrypt.hashSync(user.password, salt);
+    }
   });
- Users.beforeSave((user,options)=>{
-   if(user.changed("password")){
-     const salt = bcrypt.genSaltSync(10);
-     user.password = bcrypt.hashSync(user.password,salt);
-   }
- });
   return Users;
 };

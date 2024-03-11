@@ -10,6 +10,7 @@ const { ApiResponse } = require("../utils/ApiResponse.js");
 const { ApiError } = require("../utils/ApiError.js");
 
 const Users = require("../models/users.models.js")(sequelize);
+const Profile = require("../models/profile.models.js")(sequelize);
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken")
 
@@ -31,12 +32,16 @@ module.exports = {
             username: req.body.username,
             password: req.body.password,
           });
+          const profile = await Profile.create({
+            userId: user.id,
+          })
           return res.status(201).send(new ApiResponse(
             201,
             [{ username: req.body.username, id: Sequelize.id }],
             "Username Password registered successfully"
           )
           );
+
         } else {
          return res.status(400).send(
             new ApiError(400, "Username Password cannot be validated", [
@@ -63,7 +68,6 @@ module.exports = {
   },
   loginUser: async (req, res) => {
     const { username, password } = req.body;
-
     try {
       const user = await Users.findOne({
         where: { username: username },
