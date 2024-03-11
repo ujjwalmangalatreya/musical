@@ -92,5 +92,9 @@ module.exports = {
       return res.status(500).send(new ApiError(500, "Internal Server Error", "" + error.toString())
       );
     }
-  }
+  },
+  logOut: async (req, res) => {
+    res.status(200).send(new ApiResponse(200, [], "Logout Successful"));
+    return;
+  },
 };

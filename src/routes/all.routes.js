@@ -11,6 +11,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/v1/api/register', userController.registerUser);
 router.post('/v1/api/login', userController.loginUser);
+router.post('/v1/api/logout', userController.logoutUser);
 
 module.exports = {router}
 
