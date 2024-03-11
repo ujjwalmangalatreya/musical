@@ -24,8 +24,8 @@ module.exports = {
       ) {
         return res.status(400).send(new ApiError(400, "Username and Password should not be empty"));
       } else {
-        const validatePassword = await checkPasswordValidations(req.body.password);
-        const validateUsername = await checkUserNameValidation(req.body.username);
+        const validatePassword = checkPasswordValidations(req.body.password);
+        const validateUsername = checkUserNameValidation(req.body.username);
 
         if (validatePassword && validateUsername) {
           const user = await Users.create({
@@ -46,12 +46,12 @@ module.exports = {
          return res.status(400).send(
             new ApiError(400, "Username Password cannot be validated", [
               {
-                UserNameLength: "Username length must be atleast 3 and not greater than 15 char",
-                PasswordLength: "Password length must be atleast 7 and not greater than 15 char",
-                PasswordUpperCase: "Password must have atleast one uppercase character",
-                PasswordLowerCase: "Password must have atleast one lowercase character",
-                PasswordNumber: "Password must have atleast one number",
-                PasswordSpecialChar: "Password must have atleast one special character",
+                UserNameLength: "Username length must be at least 3 and not greater than 15 char",
+                PasswordLength: "Password length must be at least 7 and not greater than 15 char",
+                PasswordUpperCase: "Password must have at least one uppercase character",
+                PasswordLowerCase: "Password must have at least one lowercase character",
+                PasswordNumber: "Password must have at least one number",
+                PasswordSpecialChar: "Password must have at least one special character",
               },
             ])
           );
