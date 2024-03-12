@@ -4,15 +4,16 @@ const {
   checkUserNameEmpty,
   checkPasswordEmpty,
   checkPasswordValidations,
-  checkUserNameValidation
+  checkUserNameValidation,
 } = require("../services/user.service.js");
 const { ApiResponse } = require("../utils/ApiResponse.js");
 const { ApiError } = require("../utils/ApiError.js");
 
 const Users = require("../models/users.models.js")(sequelize);
-const Profile = require("../models/profile.models.js")(sequelize);
+const Profile = require("../models/profile.models")(sequelize);
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken")
+
+const jwt = require("jsonwebtoken");
 
 
 module.exports = {
@@ -34,16 +35,16 @@ module.exports = {
           });
           const profile = await Profile.create({
             userId: user.id,
-          })
+          });
           return res.status(201).send(new ApiResponse(
-            201,
-            [{ username: req.body.username, id: Sequelize.id }],
-            "Username Password registered successfully"
-          )
+              201,
+              [{ username: req.body.username, id: Sequelize.id }],
+              "Username Password registered successfully",
+            ),
           );
 
         } else {
-         return res.status(400).send(
+          return res.status(400).send(
             new ApiError(400, "Username Password cannot be validated", [
               {
                 UserNameLength: "Username length must be at least 3 and not greater than 15 char",
@@ -53,7 +54,7 @@ module.exports = {
                 PasswordNumber: "Password must have at least one number",
                 PasswordSpecialChar: "Password must have at least one special character",
               },
-            ])
+            ]),
           );
         }
       }
@@ -61,7 +62,7 @@ module.exports = {
       if (error.name === "SequelizeUniqueConstraintError") {
         res.status(400).json({ error: "Username is already taken." });
       } else {
-        res.status(500).send(new ApiError(500, "Internal Server Error", "" + error.toString())
+        res.status(500).send(new ApiError(500, "Internal Server Error", "" + error.toString()),
         );
       }
     }
@@ -73,7 +74,7 @@ module.exports = {
         where: { username: username },
       });
       if (!user) {
-       return res.status(400).send(new ApiError(400, "Username did not match.."));
+        return res.status(400).send(new ApiError(400, "Username did not match.."));
       }
       const isPasswordValid = await bcrypt.compare(password, user.password);
       if (!isPasswordValid) {
@@ -82,14 +83,14 @@ module.exports = {
       const token = jwt.sign({ username: user.username }, "nodeauthsecret", {
         expiresIn: "1h",
       });
-     return res.status(200).send(new ApiResponse(200, [
+      return res.status(200).send(new ApiResponse(200, [
         {
           id: user.id,
           username: user.username,
-          token: token
+          token: token,
         }], "Login Successful"));
     } catch (error) {
-      return res.status(500).send(new ApiError(500, "Internal Server Error", "" + error.toString())
+      return res.status(500).send(new ApiError(500, "Internal Server Error", "" + error.toString()),
       );
     }
   },
