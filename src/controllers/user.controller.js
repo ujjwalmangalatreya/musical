@@ -95,6 +95,5 @@ module.exports = {
   },
   logOut: async (req, res) => {
     res.status(200).send(new ApiResponse(200, [], "Logout Successful"));
-    return;
   },
 };
