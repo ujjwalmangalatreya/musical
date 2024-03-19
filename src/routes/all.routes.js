@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/user.controller.js");
+const profileController = require("../controllers/profile.controller.js");
 
 
 /* GET home page. */
@@ -11,5 +12,9 @@ router.get("/", function(req, res) {
 router.post("/v1/api/register", userController.registerUser);
 router.post("/v1/api/login", userController.loginUser);
 router.post("/v1/api/logout", userController.logOut);
+
+router.get("/v1/api/profile/list", profileController.list)
+
+
 
 module.exports = { router };
