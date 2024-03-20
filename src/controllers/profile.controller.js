@@ -7,18 +7,14 @@ const Profile = require("../models/profile.models")(sequelize);
 module.exports = {
      profileLists: async (req, res) => {
           try {
-               // Fetch all profiles from the database
                const profiles = await Profile.findAll();
-
-               // Send the profiles as a JSON response
-               return res.status(200).send(new ApiResponse(200,profiles,"Profile Lists"));
+               if (profiles.length === 0) {
+                    return res.status(204).send(new ApiResponse(204, profiles, "No Profile Found"));
+               }
+               return res.status(200).send(new ApiResponse(200,profiles,"Success"));
           } catch (error) {
                console.log(error);
-               // Handle errors and send an appropriate response
                return res.status(500).json({ error: 'Internal Server Error' });
           }
      }
-
-
-
 }
