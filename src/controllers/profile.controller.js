@@ -5,15 +5,13 @@ const Profile = require("../models/profile.models")(sequelize);
 
 
 module.exports = {
-
-
      profileLists: async (req, res) => {
           try {
                // Fetch all profiles from the database
                const profiles = await Profile.findAll();
 
                // Send the profiles as a JSON response
-               return res.status(200).json(profiles);
+               return res.status(200).send(new ApiResponse(200,profiles,"Profile Lists"));
           } catch (error) {
                console.log(error);
                // Handle errors and send an appropriate response
